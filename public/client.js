@@ -1,27 +1,16 @@
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/cool-file.js');
-}
+
 
 $(document).ready(function(){
    
   $(".flick").on("click", function(){
    
-    var result = fetch("https://www.eksisozluk.com", {
-      mode: "no-cors",
-      method: "get"
-    });
-    result
-      .then(function(response) {
-        alert("response " + response);
-        return response.text();
-      })
-      .then(function(text) {
-        alert("got text " + text);
-      })
-      .catch(function(ex) {
-        alert("failed " + ex);
-      });
+  var request = require('request');
+request('https://www.eksisozluk.com/fi', function (error, response, body) {
+  console.log('error:', error); // Print the error if one occurred
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  alert('body: ' + body); // Print the HTML for the Google homepage.
+});
     
     
     

@@ -1,11 +1,6 @@
-
-self.addEventListener('install', function(evet) {
-  event.registerForeignFetch({
-    scopes: [self.registration.scope], 
-    origins: ['*']
-  });
-});
-
-self.addEventListener('fetch', event => {
-  event.respondWith(fetch(event.request));
+var request = require('request');
+request('https://www.eksisozluk.com/fi', function (error, response, body) {
+  console.log('error:', error); // Print the error if one occurred
+  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+  console.log('body:', body); // Print the HTML for the Google homepage.
 });
