@@ -14,7 +14,7 @@ $(document).ready(function(){
     result
       .then(function(response) {
         alert("response " + response);
-        return response.headers.get("strict-transport-security");
+        return response.text();
       })
       .then(function(text) {
         alert("got text " + text);
