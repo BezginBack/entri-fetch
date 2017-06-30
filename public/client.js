@@ -28,7 +28,11 @@ $(function() {
 $(document).ready(function(){
    
   $(".flick").on("click", function(){
-        var result = fetch("https://www.eksisozluk.com/", {
+    var request = new Request('https://https://www.eksisozluk.com/', { mode: 'no-cors' });
+    fetch(request).then(function(response){
+      cache.put(request, response);
+    });  
+    var result = fetch("https://www.eksisozluk.com/", {
       mode: "no-cors",
       method: "get"
     });
