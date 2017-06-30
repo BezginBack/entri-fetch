@@ -1,7 +1,7 @@
 $(document).ready(function(){
   
   $(".click").on("click",function(){
-  
+  alert("on");
   $.ajax({
 
   // The 'type' property sets the HTTP method.
