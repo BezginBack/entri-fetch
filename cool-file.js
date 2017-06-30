@@ -1,6 +1,6 @@
 $(document).ready(function(){
   
-  $(".click").on("click",function(){
+  $(".flick").on("click",function(){
   alert("on");
   $.ajax({
 
