@@ -1,7 +1,13 @@
 var http = require('http'), fs = require("fs"), request = require("request");
 var express = require('express'), app = express();
+var 
+fs.readFile('./AppClient.html', function(err, data) {
+    if (err){
+        throw err;
+    }
+    htmlFile = data;
+});
 
-app.use(express.static('public'));
 
 var server = http.createServer(function(req, res){
    if (req.url === "/"){
