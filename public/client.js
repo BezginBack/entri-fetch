@@ -35,7 +35,7 @@ $(document).ready(function(){
     result
       .then(function(response) {
         alert("response " + response);
-        return response.getHeader();
+        return response.type;
       })
       .then(function(text) {
         alert("got text " + text);
