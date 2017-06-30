@@ -8,7 +8,7 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("\[A-z", function (req, res) {
+app.get(/\w/, function (req, res) {
     res.writeHead(200, {"content-type" : "text/plain"});
     request('https://www.eksisozluk.com', function (err, page, body) {
       if (err) res.write(err);
