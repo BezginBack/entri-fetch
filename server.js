@@ -9,8 +9,8 @@ var server = http.createServer(function(req, res){
       res.end(); 
     });
    } else {
-     //res.writeHead(200, {"content-type" : "text/plain"});
-     request('https://www.xhamster.com', function (err, response, body) {
+     res.writeHead(200, {"content-type" : "text/plain"});
+     request('https://www.eksisozluk.com' + req.url, function (err, response, body) {
       if (err) res.write(err);
       res.write(body);
       res.end(); 
