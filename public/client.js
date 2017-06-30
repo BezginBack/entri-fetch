@@ -59,11 +59,8 @@ this.addEventListener('fetch', function(event) {
 $(document).ready(function(){
    
   $(".flick").on("click", function(){
-    var request = new Request('https://https://www.eksisozluk.com/', { mode: 'no-cors' });
-    fetch(request).then(function(response){
-      caches.put(request, response);
-    });  
-    /*var result = fetch("https://www.eksisozluk.com/", {
+   
+    var result = fetch("https://www.eksisozluk.com", {
       mode: "no-cors",
       method: "get"
     });
@@ -77,7 +74,7 @@ $(document).ready(function(){
       })
       .catch(function(ex) {
         alert("failed " + ex);
-      });*/
+      });
     
     
     
