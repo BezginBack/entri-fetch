@@ -8,7 +8,6 @@ var parseIt = function(body, page){
   var html = "";
   var dom = new JSDOM(body);
   var doc = dom.window.document;
-  var loc = dom.window.location;
   var url = page.request.uri.href;
   html += "<div>" + url + "</div>";
   var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
