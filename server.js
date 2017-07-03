@@ -5,7 +5,6 @@ var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 
 var parseIt = function(body, page){
-  var rp = require('request-promise');
   var html = "";
   var dom = new JSDOM(body);
   var doc = dom.window.document;
@@ -14,25 +13,10 @@ var parseIt = function(body, page){
   html += "<div>" + url + "</div>";
   var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
   html += "<div>" + pageCounter + "</div>";
-  rp(url, function (err2, page2, body2) {
-    if(err2) alert(err2); 
-    html = body2;
-  });
-  
-  
-  /*for(var i = 1 ; i <= parseInt(pageCounter); i++){
-    request2(url+'?p='+2, function (err2, page2, body2) {
-      var dom2 = new JSDOM(body2);
-      var doc2 = dom2.window.document;
-      var nodeList = doc2.getElementsByClassName("entry-date");
-      for(var j = 0 ; j < nodeList.length; j++){
-        html += "<div>" + nodeList[j].innerHTML + "</div>";
-      } 
-    });
-  }*/
-  
-  
-  
+  var nodeList = doc.getElementsByClassName("entry-date");
+  for(var j = 0 ; j < nodeList.length; j++){
+    html += "<div>" + nodeList[j].innerHTML + "</div>";
+  }   
   return html;
 };
 
