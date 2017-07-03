@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var request = require("request");
+var url = require("url");
 
 app.use(express.static('public'));
 
@@ -10,11 +11,13 @@ app.get("/", function (req, res) {
 
 app.get(/\w/, function (req, res) {
     res.writeHead(200, {"content-type" : "text/plain"});
-    request('https://www.eksisozluk.com', function (err, page, body) {
-      if (err) res.write(err);
-      res.write(body);
-      res.end();
-    });    
+    if(req.query.search){
+      request('https://www.eksisozluk.com/'+req.query.search, function (err, page, body) {
+        if (err) res.write(err);
+        res.write(body);
+        res.end();
+      });
+    }    
 });
 
 
