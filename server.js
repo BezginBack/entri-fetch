@@ -25,7 +25,7 @@ app.get("/", function (req, res) {
       if (err) res.write(err);
       res.writeHead(200, {"content-type" : "text/html"});
       res.charset = "utf-8";
-      res.write(" " + parseIt(body));
+      res.write(" " + parseIt(body)+" "+ page.request.uri.href);
       res.end();
     });
   } else {
