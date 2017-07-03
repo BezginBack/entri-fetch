@@ -10,7 +10,7 @@ var parseIt = function(body){
   var doc = dom.window.document;
   var nodeList = doc.getElementById("entry-list").childNodes;
   for(var i = 0 ; i < nodeList.length; i++){
-    op += nodeList[i];
+    op += nodeList[i].innerHTML;
   }
   return op;
 };
