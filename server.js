@@ -17,8 +17,10 @@ var parseIt = function(body, page){
   
   
   for(var i = 1 ; i <= pageCounter; i++){
-    request('url?p='+i, function (err, page, body) {
-      var nodeList = doc.getElementsByClassName("entry-date");
+    request(url+'?p='+i, function (err2, page2, body2) {
+      var dom2 = new JSDOM(body2);
+      var doc2 = dom2.window.document;
+      var nodeList = doc2.getElementsByClassName("entry-date");
       for(var j = 0 ; j < nodeList.length; j++){
         html += "<div>" + nodeList[j].innerHTML + "</div>";
       } 
