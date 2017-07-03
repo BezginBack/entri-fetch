@@ -9,13 +9,24 @@ var parseIt = function(body, page){
   var dom = new JSDOM(body);
   var doc = dom.window.document;
   var loc = dom.window.location;
-  html += "<div>" + page.request.uri.href + "</div>";
-  var pageCounter = doc.getElementsByClassName("pager");
-  html += "<div>" + pageCounter[0].getAttribute("data-pagecount") + "</div>";
-  var nodeList = doc.getElementsByClassName("entry-date");
-  for(var i = 0 ; i < nodeList.length; i++){
-    html += "<div>" + nodeList[i].innerHTML + "</div>";
+  var url = page.request.uri.href;
+  html += "<div>" + url + "</div>";
+  var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
+  html += "<div>" + pageCounter + "</div>";
+  
+  
+  
+  for(var i = 1 ; i <= pageCounter; i++){
+    request('url?p='+i, function (err, page, body) {
+      var nodeList = doc.getElementsByClassName("entry-date");
+      for(var j = 0 ; j < nodeList.length; j++){
+        html += "<div>" + nodeList[j].innerHTML + "</div>";
+      } 
+    });
   }
+  
+  
+  
   return html;
 };
 
