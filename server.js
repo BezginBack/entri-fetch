@@ -5,6 +5,7 @@ var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 
 var parseIt = function(body, page){
+  var request2 = require("request");
   var html = "";
   var dom = new JSDOM(body);
   var doc = dom.window.document;
@@ -16,8 +17,8 @@ var parseIt = function(body, page){
   
   
   
-  for(var i = 1 ; i <= pageCounter; i++){
-    request(url+'?p='+i, function (err2, page2, body2) {
+  //for(var i = 1 ; i <= parseInt(pageCounter); i++){
+    request2(url+'?p='+2, function (err2, page2, body2) {
       var dom2 = new JSDOM(body2);
       var doc2 = dom2.window.document;
       var nodeList = doc2.getElementsByClassName("entry-date");
@@ -25,7 +26,7 @@ var parseIt = function(body, page){
         html += "<div>" + nodeList[j].innerHTML + "</div>";
       } 
     });
-  }
+  //}
   
   
   
@@ -36,7 +37,7 @@ app.use(express.static('public'));
 
 app.get("/", function (req, res) {
   if(req.query.search){
-    request('https://www.eksisozluk.com/' + req.query.search, function (err, page, body) {
+    request('https://eksisozluk.com/' + req.query.search, function (err, page, body) {
       if (err) res.write(err);
       res.writeHead(200, {"content-type" : "text/html"});
       res.charset = "utf-8";
