@@ -9,6 +9,7 @@ app.get("/", function (req, res) {
     request('https://www.eksisozluk.com/' + req.query.search, function (err, page, body) {
       if (err) res.write(err);
       res.writeHead(200, {"content-type" : "text/plain"});
+      res.charset = "utf-8";
       res.write(body);
       res.end();
     });
