@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var request = require("request");
 var jsdom = require("jsdom");
+var { JSDOM } = jsdom;
 
 app.use(express.static('public'));
 
@@ -11,7 +12,8 @@ app.get("/", function (req, res) {
       if (err) res.write(err);
       res.writeHead(200, {"content-type" : "text/plain"});
       res.charset = "utf-8";
-      res.write(body);
+      var dom = new JSDOM(body);
+      res.write(" "+dom.window.document.body.children.length);
       res.end();
     });
   } else {
