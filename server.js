@@ -7,7 +7,8 @@ var { JSDOM } = jsdom;
 var parseIt = function(body){
   var dom = new JSDOM(body);
   var doc = dom.window.document;
-  var op = doc.getElementById("entry-list").innerHTML;
+  var nodeList = doc.getElementById("entry-list").childNodes;
+  for(node in nodeList){}
   return op;
 };
 
