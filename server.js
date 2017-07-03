@@ -4,16 +4,21 @@ var request = require("request");
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 
+var parseIt = function(body){
+  var dom = new JSDOM(body);
+  var op = dom.window.document.getElementById("site-footer").innerHtml;
+  return op;
+};
+
 app.use(express.static('public'));
 
 app.get("/", function (req, res) {
   if(req.query.search){
     request('https://www.eksisozluk.com/' + req.query.search, function (err, page, body) {
       if (err) res.write(err);
-      res.writeHead(200, {"content-type" : "text/plain"});
+      res.writeHead(200, {"content-type" : "text/html"});
       res.charset = "utf-8";
-      var dom = new JSDOM(body);
-      res.write(" "+dom.window.document.querySelector("p").outerHtml);
+      res.write(" " + parseIt(body));
       res.end();
     });
   } else {
