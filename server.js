@@ -5,10 +5,13 @@ var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 
 var parseIt = function(body){
+  var op = "";
   var dom = new JSDOM(body);
   var doc = dom.window.document;
   var nodeList = doc.getElementById("entry-list").childNodes;
-  for(node in nodeList){}
+  for(var i = 0 ; i < nodeList.length; i++){
+    op += nodeList[i];
+  }
   return op;
 };
 
