@@ -5,7 +5,7 @@ var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 
 var parseIt = function(body, page){
-  var request2 = require("request");
+  var rp = require('request-promise');
   var html = "";
   var dom = new JSDOM(body);
   var doc = dom.window.document;
@@ -14,7 +14,7 @@ var parseIt = function(body, page){
   html += "<div>" + url + "</div>";
   var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
   html += "<div>" + pageCounter + "</div>";
-  request2(url, function (err2, page2, body2) {
+  rp(url, function (err2, page2, body2) {
     if(err2) alert(err2); 
     html = body2;
   });
