@@ -4,12 +4,14 @@ var request = require("request");
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 
-var parseIt = function(body){
+var parseIt = function(body, page){
   var html = "";
   var dom = new JSDOM(body);
   var doc = dom.window.document;
   var loc = dom.window.location;
-  html += "<div>"+loc.hostname+"</div>";
+  html += "<div>" + page.request.uri.href + "</div>";
+  var pageCounter = doc.getElementsByClassName("pager").data;
+  html += "<div>" + pageCounter + "</div>";
   var nodeList = doc.getElementsByClassName("entry-date");
   for(var i = 0 ; i < nodeList.length; i++){
     html += "<div>" + nodeList[i].innerHTML + "</div>";
@@ -25,7 +27,7 @@ app.get("/", function (req, res) {
       if (err) res.write(err);
       res.writeHead(200, {"content-type" : "text/html"});
       res.charset = "utf-8";
-      res.write(" " + parseIt(body)+" "+ page.request.uri.href);
+      res.write(parseIt(body, page));
       res.end();
     });
   } else {
