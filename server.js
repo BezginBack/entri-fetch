@@ -12,6 +12,7 @@ app.get(/\w/, function (req, res) {
     res.writeHead(200, {"content-type" : "text/plain"});
     request('https://www.eksisozluk.com', function (err, page, body) {
       if (err) res.write(err);
+      res.setEncoding("utf8");
       res.write(body);
       res.end();
     });    
