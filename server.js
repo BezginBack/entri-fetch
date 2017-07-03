@@ -13,7 +13,7 @@ app.get("/", function (req, res) {
       res.writeHead(200, {"content-type" : "text/plain"});
       res.charset = "utf-8";
       var dom = new JSDOM(body);
-      res.write(" "+dom.window.document.body.children.length);
+      res.write(" "+dom.window.document.querySelector("p").outerHtml);
       res.end();
     });
   } else {
