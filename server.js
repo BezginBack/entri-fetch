@@ -6,7 +6,8 @@ var { JSDOM } = jsdom;
 
 var parseIt = function(body){
   var dom = new JSDOM(body);
-  var op = dom.window.document.getElementById("site-footer").innerHtml;
+  var doc = dom.window.document;
+  var op = doc.getElementById("entry-list").innerHTML;
   return op;
 };
 
@@ -16,7 +17,7 @@ app.get("/", function (req, res) {
   if(req.query.search){
     request('https://www.eksisozluk.com/' + req.query.search, function (err, page, body) {
       if (err) res.write(err);
-      res.writeHead(200, {"content-type" : "text/html"});
+      res.writeHead(200, {"content-type" : "text/plain"});
       res.charset = "utf-8";
       res.write(" " + parseIt(body));
       res.end();
