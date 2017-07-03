@@ -14,10 +14,13 @@ var parseIt = function(body, page){
   html += "<div>" + url + "</div>";
   var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
   html += "<div>" + pageCounter + "</div>";
+  request2(url, function (err2, page2, body2) {
+    if(err2) alert(err2); 
+    html = body2;
+  });
   
   
-  
-  //for(var i = 1 ; i <= parseInt(pageCounter); i++){
+  /*for(var i = 1 ; i <= parseInt(pageCounter); i++){
     request2(url+'?p='+2, function (err2, page2, body2) {
       var dom2 = new JSDOM(body2);
       var doc2 = dom2.window.document;
@@ -26,7 +29,7 @@ var parseIt = function(body, page){
         html += "<div>" + nodeList[j].innerHTML + "</div>";
       } 
     });
-  //}
+  }*/
   
   
   
