@@ -16,22 +16,27 @@ function parseIt(url, callback){
         if(doc.getElementById("topic").getAttribute("data-not-found") == null){
           var url = page.request.uri.href;
           //data += "<div>" + url + "</div>";
-          //if(doc.getElementsByClassName("pager")[0]){
-            //var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
+          if(doc.getElementsByClassName("pager")[0]){
+            var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
             //data += "<div>" + pageCounter + "</div>";
-          //}
+          }
           //var nodeList = doc.getElementsByClassName("entry-date");
           //for(var j = 0 ; j < nodeList.length; j++){
             //data += "<div>" + nodeList[j].innerHTML + "</div>";
           //}
             var q = async.queue(function (task, done) {
-              request(task.url, function (err, page, body){
-                data += "<div>" + page.request.uri.href + "</div>"
+              request(task.url, function (err, page, body2){
+                var dom2 = new JSDOM(body2);
+                var doc2 = dom2.window.document;
+                var nodeList2 = doc2.getElementsByClassName("entry-date");
+                for(var j = 0 ; j < nodeList2.length; j++){
+                  data += "<div>" + nodeList2[j].innerHTML + "</div>";
+                }
                 callback(null, data);
               }); 
               done();  
             }, 2);
-            for(var i = 1; i < 10; i++) {
+            for(var i = 1; i <= pageCounter; i++) {
               q.push({url: url+"?p="+i});
             }    
         }
