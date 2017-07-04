@@ -29,7 +29,7 @@ var options = {
 
 function callback(err, page, body) {
   if (!err && page.statusCode == 200) {
-    return body;
+    return body.title;
   }
 }
 
@@ -39,7 +39,7 @@ app.get("/", function (req, res) {
   if(req.query.search){
     var q = req.query.search;
     res.writeHead(200, {"content-type" : "text/html"});
-    res.write(" " + parseIt(q));
+    res.write(" " + request(options, callback));
     res.end();
   } else {
     res.sendFile(__dirname + '/views/index.html');
