@@ -25,8 +25,9 @@ function parseIt(url, callback){
               var dom2 = new JSDOM(body2);
               var doc2 = dom2.window.document;
               var nodeList2 = doc2.getElementsByClassName("entry-date");
+              var nodeList3 = doc2.getElementsByClassName("entry-author");
               for(var j = 0 ; j < nodeList2.length; j++){
-                data.push("<div>" + nodeList2[j].innerHTML + "</div>");
+                data.push("<div>" + nodeList3[j].innerHTML + " : " + nodeList2[j].innerHTML + "</div>");
               }
               done();
               callback(null, data);
