@@ -4,19 +4,23 @@ var request = require("request");
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 
-function parseIt(body, page){
+function parseIt(q, callback){
   var data = "";
-  var dom = new JSDOM(body);
-  var doc = dom.window.document;
-  var url = page.request.uri.href;
-  data += "<div>" + url + "</div>";
-  var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
-  data += "<div>" + pageCounter + "</div>";
-  /*var nodeList = doc.getElementsByClassName("entry-date");
-  for(var j = 0 ; j < nodeList.length; j++){
-    html += "<div>" + nodeList[j].innerHTML + "</div>";
-  }*/
-  return data;
+  request('https://eksisozluk.com/' + q, function (err, page, body) {
+    if (!err && page.statusCode == 200) {
+      var dom = new JSDOM(body);
+      var doc = dom.window.document;
+      var url = page.request.uri.href;
+      data += "<div>" + url + "</div>";
+      var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
+      data += "<div>" + pageCounter + "</div>";
+      var nodeList = doc.getElementsByClassName("entry-date");
+      for(var j = 0 ; j < nodeList.length; j++){
+        data += "<div>" + nodeList[j].innerHTML + "</div>";
+      }
+      callback(null, data);
+    }
+  });
 }
 
 app.use(express.static('public'));
@@ -24,10 +28,9 @@ app.use(express.static('public'));
 app.get("/", function (req, res) {
   if(req.query.search){
     var q = req.query.search;
-    var data = "";
-    request('https://eksisozluk.com/' +q, function (err, page, body) {
+    parseIt(q, function(err, data){
       res.writeHead(200, {"content-type" : "text/html"});
-      res.write(" " + body);
+      res.write(" " + data);
       res.end();
     });
   } else {
