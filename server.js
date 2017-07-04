@@ -4,11 +4,11 @@ var request = require("request");
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 
-var parseIt = function(query){
+var parseIt = function(q){
   var html = "";
-  request('https://eksisozluk.com/' + query, function (err, page, body) {
+  request('https://eksisozluk.com/', function (err, page, body) {
     if (err) return err;
-    var dom = new JSDOM(body);
+    /*var dom = new JSDOM(body);
     var doc = dom.window.document;
     var url = page.request.uri.href;
     html += "<div>" + url + "</div>";
@@ -17,7 +17,8 @@ var parseIt = function(query){
     var nodeList = doc.getElementsByClassName("entry-date");
     for(var j = 0 ; j < nodeList.length; j++){
       html += "<div>" + nodeList[j].innerHTML + "</div>";
-    }   
+    }*/
+    html = body;
   });
   return html;
 };
@@ -26,8 +27,9 @@ app.use(express.static('public'));
 
 app.get("/", function (req, res) {
   if(req.query.search){
-    var query = req.query.search;  
-    res.write(parseIt(query));
+    var q = req.query.search;
+    res.writeHead(200, {"content-type" : "text/html"});
+    res.write(parseIt(q));
     res.end();
   } else {
     res.sendFile(__dirname + '/views/index.html');
