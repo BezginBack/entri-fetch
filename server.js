@@ -4,16 +4,16 @@ var request = require("request");
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 var async = require("async");
+var cheerio = require("cheerio");
 
 
 function parseIt(url, callback){
   var data = [];
   request(url, function (err, page, body) {
     if (!err && page.statusCode == 200) {
-      var dom = new JSDOM(body);
-      var doc = dom.window.document;
-      if (doc.getElementById("topic")){
-        if(doc.getElementById("topic").getAttribute("data-not-found") == null){
+      var $ = cheerio.load(body);
+      if ($("#topic")){
+        if($("#topic").attr("data-not-found") == null){
           var url = page.request.uri.href;
           //data += "<div>" + url + "</div>";
           if(doc.getElementsByClassName("pager")[0]){
@@ -27,9 +27,9 @@ function parseIt(url, callback){
               var nodeList2 = doc2.getElementsByClassName("entry-date");
               var nodeList3 = doc2.getElementsByClassName("entry-author");
               for(var j = 0 ; j < nodeList2.length; j++){
-                data.push("<div>" + task.id + " : "+ nodeList3[j].innerHTML + " : " + nodeList2[j].innerHTML + "</div>");
+                  data.push("<div>" + task.id + " ~ "+ nodeList3[j].innerHTML + " ~ " + nodeList2[j].innerHTML + "</div>");
               }
-              
+              done();
               callback(null, data);
             }); 
           }, 1);
