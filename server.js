@@ -39,9 +39,10 @@ app.use(express.static('public'));
 app.get("/", function (req, res) {
   if(req.query.search){
     var q = req.query.search;
+    res.writeHead(200, {"content-type" : "text/plain"});
     parseIt(q, function(err, data){
       if(err) res.end(err);
-      res.writeHead(200, {"content-type" : "text/html"});
+      
       res.write(data);
       res.end();
     });
