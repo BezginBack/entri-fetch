@@ -13,9 +13,7 @@ function parseIt(url, callback){
       if ($("#topic")){
         if($("#topic").data("not-found") == null){
           var url = page.request.uri.href;
-          //data += "<div>" + url + "</div
           var pageCounter = parseInt($(".pager:nth-child(0)").data("pagecount"));
-            //data += "<div>" + pageCounter + "</div>";
           var q = async.queue(function (task, done) {
             request(task.url, function (err, page, body2){
               var $ = cheerio.load(body2);
@@ -33,7 +31,6 @@ function parseIt(url, callback){
           }    
         }
       }
-      //callback(null, data);
     } else {
       callback(null, "error or bad search");
     }
