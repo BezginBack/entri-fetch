@@ -20,25 +20,21 @@ function parseIt(url, callback){
             var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
             //data += "<div>" + pageCounter + "</div>";
           }
-          //var nodeList = doc.getElementsByClassName("entry-date");
-          //for(var j = 0 ; j < nodeList.length; j++){
-            //data += "<div>" + nodeList[j].innerHTML + "</div>";
-          //}
-            var q = async.queue(function (task, done) {
-              request(task.url, function (err, page, body2){
-                var dom2 = new JSDOM(body2);
-                var doc2 = dom2.window.document;
-                var nodeList2 = doc2.getElementsByClassName("entry-date");
-                for(var j = 0 ; j < nodeList2.length; j++){
-                  data += "<div>" + nodeList2[j].innerHTML + "</div>";
-                }
-                callback(null, data);
-              }); 
-              done();  
-            }, 2);
-            for(var i = 1; i <= pageCounter; i++) {
-              q.push({url: url+"?p="+i});
-            }    
+          var q = async.queue(function (task, done) {
+            request(task.url, function (err, page, body2){
+              var dom2 = new JSDOM(body2);
+              var doc2 = dom2.window.document;
+              var nodeList2 = doc2.getElementsByClassName("entry-date");
+              for(var j = 0 ; j < nodeList2.length; j++){
+                data = "<div>" + nodeList2[j].innerHTML + "</div>";
+              }
+              callback(null, data);
+            }); 
+            done();  
+          }, 5);
+          for(var i = 1; i <= pageCounter; i++) {
+            q.push({url: url+"?p="+i});
+          }    
         }
       }
       //callback(null, data);
