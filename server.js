@@ -4,7 +4,7 @@ var request = require("request");
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 
-var parseIt = function(q){
+function parseIt(q){
   var html = "";
   request('https://eksisozluk.com/', function (err, page, body) {
     if (err) return err;
@@ -19,9 +19,19 @@ var parseIt = function(q){
       html += "<div>" + nodeList[j].innerHTML + "</div>";
     }*/
     html = body;
+    return html;
   });
-  return html;
+}
+
+var options = {
+  url: 'https://eksisozluk.com/'
 };
+
+function callback(err, page, body) {
+  if (!err && page.statusCode == 200) {
+    return body;
+  }
+}
 
 app.use(express.static('public'));
 
@@ -29,7 +39,7 @@ app.get("/", function (req, res) {
   if(req.query.search){
     var q = req.query.search;
     res.writeHead(200, {"content-type" : "text/html"});
-    res.write(parseIt(q));
+    res.write(" " + parseIt(q));
     res.end();
   } else {
     res.sendFile(__dirname + '/views/index.html');
