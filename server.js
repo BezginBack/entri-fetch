@@ -35,17 +35,6 @@ function parseIt(url, callback){
 }
 */
 
-function getIt(url){
-  
-}
-
-var q = async.queue(function (task, done) {
-  getIt(task.url) ;
-  done();  
-}, 2);
-
-
-
 app.use(express.static('public'));
 
 app.get("/", function (req, res) {
@@ -58,14 +47,16 @@ app.get("/", function (req, res) {
       //res.write(data);
       //res.end();
     //});
+    var data = "raw";
     var q = async.queue(function (task, done) {
-      res.write(data);
-      res.end();
+      data = task.url;
       done();  
     }, 2);
     for(var i = 0; i < 10; i++) {
       q.push({url: "https://eksisozluk.com/"+i});
     }
+    res.write(data); 
+    res.end();
   } else {
     res.sendFile(__dirname + '/views/index.html');
   }
