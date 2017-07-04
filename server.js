@@ -28,8 +28,8 @@ function parseIt(url, callback){
               for(var j = 0 ; j < nodeList2.length; j++){
                 data.push("<div>" + nodeList2[j].innerHTML + "</div>");
               }
-              callback(null, data);
               done();
+              callback(null, data);
             }); 
           }, 1);
           for(var i = 1; i <= pageCounter; i++) {
