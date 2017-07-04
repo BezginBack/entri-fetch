@@ -27,14 +27,14 @@ function parseIt(url, callback){
               var nodeList2 = doc2.getElementsByClassName("entry-date");
               var nodeList3 = doc2.getElementsByClassName("entry-author");
               for(var j = 0 ; j < nodeList2.length; j++){
-                data.push("<div>" + nodeList3[j].innerHTML + " : " + nodeList2[j].innerHTML + "</div>");
+                data.push("<div>" + task.id + " : "+ nodeList3[j].innerHTML + " : " + nodeList2[j].innerHTML + "</div>");
               }
-              done();
+              
               callback(null, data);
             }); 
           }, 1);
           for(var i = 1; i <= pageCounter; i++) {
-            q.push({url: url+"?p="+i});
+            q.push({url: url+"?p="+i, id: i});
           }    
         }
       }
