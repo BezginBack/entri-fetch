@@ -5,7 +5,7 @@ var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 var async = require("async");
 
-/*
+
 function parseIt(url, callback){
   var data = "";
   request(url, function (err, page, body) {
@@ -24,7 +24,15 @@ function parseIt(url, callback){
           //for(var j = 0 ; j < nodeList.length; j++){
             //data += "<div>" + nodeList[j].innerHTML + "</div>";
           //}
-          
+            var q = async.queue(function (task, done) {
+              request(task.url, function (err, page, body){
+                callback(nul)
+              }); 
+              done();  
+            }, 2);
+            for(var i = 0; i < 10; i++) {
+              q.push({url: "https://eksisozluk.com/"+i});
+            }    
         }
       }
       callback(null, data);
@@ -33,7 +41,7 @@ function parseIt(url, callback){
     }
   });
 }
-*/
+
 
 app.use(express.static('public'));
 
@@ -48,14 +56,7 @@ app.get("/", function (req, res) {
       //res.end();
     //});
     var data = "raw";
-    var q = async.queue(function (task, done) {
-      data = task.url;
-      done(null, data);  
-    }, 2);
-    for(var i = 0; i < 10; i++) {
-      q.push({url: "https://eksisozluk.com/"+i});
-    }
-    res.write(" " + q); 
+    res.write(); 
     res.end();
   } else {
     res.sendFile(__dirname + '/views/index.html');
