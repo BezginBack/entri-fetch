@@ -44,6 +44,7 @@ var q = async.queue(function (task, done) {
     });
 }, 5);
 
+q.push({url: "https://eksisozluk.com/"});
 
 app.use(express.static('public'));
 
