@@ -25,14 +25,11 @@ app.get("/", function (req, res) {
   if(req.query.search){
     var q = req.query.search;
     var data = "";
-    var d = request('https://eksisozluk.com/' +q, function (err, page, body) {
-       return body;
+    request('https://eksisozluk.com/' +q, function (err, page, body) {
+      res.writeHead(200, {"content-type" : "text/html"});
+      res.write(" " + body);
+      res.end();
     });
-    
-    res.writeHead(200, {"content-type" : "text/html"});
-    res.write(" " + d);
-    res.end();
-    
   } else {
     res.sendFile(__dirname + '/views/index.html');
   }
