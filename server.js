@@ -6,17 +6,17 @@ var cheerio = require("cheerio");
 
 
 function parseIt(url, callback){
-  var data = [];
+  var data = "";
   request(url, function (err, page, body) {
     if (!err && page.statusCode == 200) {
       var $ = cheerio.load(body);      
       var url = page.request.uri.href;
-      var pageCounter = parseInt($(".pager:eq(0)").data("pagecount"));
+      var pageCounter = parseInt($(".pager").eq(0).data("pagecount"));
       var q = async.queue(function (task, done) {
         request(task.url, function (err, page, body2){
           var $ = cheerio.load(body2);
-          for(var j = 0 ; j < 10; j++){
-              data.push("<div>" + task.id + "</div>");
+          for(var j = 0 ; j < $(".entry-date").get().length; j++){
+            data = "<div>" + task.id + " ~ " + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>";
           }
           done();
           callback(null, data);
@@ -41,9 +41,9 @@ app.get("/", function (req, res) {
     res.writeHead(200, {"content-type" : "text/html"});
     parseIt(url, function(err, data){
       if(err) res.end(err);
-      for(var i = 0; i < data.length; i++){
-        res.write(data[i]);  
-      }
+      //for(var i = 0; i < data.length; i++){
+        res.write(data);  
+      //}
     });
     //res.end();
   } else {
