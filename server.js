@@ -14,7 +14,7 @@ function parseIt(url, callback){
       var doc = dom.window.document;
       if (doc.getElementById("topic")){
         if(doc.getElementById("topic").getAttribute("data-not-found") == null){
-          var url = page.request.uri.href;
+          //var url = page.request.uri.href;
           //data += "<div>" + url + "</div>";
           //if(doc.getElementsByClassName("pager")[0]){
             //var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
@@ -25,9 +25,9 @@ function parseIt(url, callback){
             //data += "<div>" + nodeList[j].innerHTML + "</div>";
           //}
             var q = async.queue(function (task, done) {
-              request(task.url, function (err, page, body){
-                callback(nul)
-              }); 
+              //request(task.url, function (err, page, body){
+                callback(null, task.url);
+              //}); 
               done();  
             }, 2);
             for(var i = 0; i < 10; i++) {
@@ -35,7 +35,7 @@ function parseIt(url, callback){
             }    
         }
       }
-      callback(null, data);
+      //callback(null, data);
     } else {
       callback(null, "error or bad search");
     }
@@ -47,16 +47,13 @@ app.use(express.static('public'));
 
 app.get("/", function (req, res) {
   if(req.query.search){
-    //var q = req.query.search;
-    //var url = 'https://eksisozluk.com/' + q;
+    var q = req.query.search;
+    var url = 'https://eksisozluk.com/' + q;
     res.writeHead(200, {"content-type" : "text/plain"});
-    //parseIt(url, function(err, data){
-      //if(err) res.end(err);
-      //res.write(data);
-      //res.end();
-    //});
-    var data = "raw";
-    res.write(); 
+    parseIt(url, function(err, data){
+      if(err) res.end(err);
+      res.write(" "+data);
+    });
     res.end();
   } else {
     res.sendFile(__dirname + '/views/index.html');
