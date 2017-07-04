@@ -13,20 +13,23 @@ function parseIt(q, callback){
       if (doc.getElementById("topic")){
         if(doc.getElementById("topic").getAttribute("data-not-found") == null){
           var url = page.request.uri.href;
-          data += "<div>" + url + "</div>";
-          if(doc.getElementsByClassName("pager")[0]){
-            var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
-            data += "<div>" + pageCounter + "</div>";
-          }
-          var nodeList = doc.getElementsByClassName("entry-date");
-          for(var j = 0 ; j < nodeList.length; j++){
-            data += "<div>" + nodeList[j].innerHTML + "</div>";
-          }
+          //data += "<div>" + url + "</div>";
+          //if(doc.getElementsByClassName("pager")[0]){
+            //var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
+            //data += "<div>" + pageCounter + "</div>";
+          //}
+          //var nodeList = doc.getElementsByClassName("entry-date");
+          //for(var j = 0 ; j < nodeList.length; j++){
+            //data += "<div>" + nodeList[j].innerHTML + "</div>";
+          //}
+          request(url+"?p=2", function (err, page, body) {
+            callback(null, body);      
+          });
         }
       }
       callback(null, data);
     } else {
-      callback(null, "connection error or not found");
+      callback(null, "error or bad search");
     }
   });
 }
