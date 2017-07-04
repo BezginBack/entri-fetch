@@ -11,19 +11,22 @@ function parseIt(q, callback){
       var dom = new JSDOM(body);
       var doc = dom.window.document;
       if (doc.getElementById("topic")){
-
-      }
-      var url = page.request.uri.href;
-      data += "<div>" + url + "</div>";
-      if(doc.getElementsByClassName("pager")[0]){
-        var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
-        data += "<div>" + pageCounter + "</div>";
-      }
-      var nodeList = doc.getElementsByClassName("entry-date");
-      for(var j = 0 ; j < nodeList.length; j++){
-        data += "<div>" + nodeList[j].innerHTML + "</div>";
+        if(doc.getElementById("topic").getAttribute("data-not-found") == null){
+          var url = page.request.uri.href;
+          data += "<div>" + url + "</div>";
+          if(doc.getElementsByClassName("pager")[0]){
+            var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
+            data += "<div>" + pageCounter + "</div>";
+          }
+          var nodeList = doc.getElementsByClassName("entry-date");
+          for(var j = 0 ; j < nodeList.length; j++){
+            data += "<div>" + nodeList[j].innerHTML + "</div>";
+          }
+        }
       }
       callback(null, data);
+    } else {
+      callback(null, "connection error or not found");
     }
   });
 }
