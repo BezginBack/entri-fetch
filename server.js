@@ -1,9 +1,11 @@
-var express = require('express');
+var express = require("express");
 var app = express();
 var request = require("request");
 var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
+var async = require("async");
 
+/*
 function parseIt(url, callback){
   var data = "";
   request(url, function (err, page, body) {
@@ -31,6 +33,18 @@ function parseIt(url, callback){
     }
   });
 }
+*/
+
+
+var q = async.queue(function (task, done) {
+    request(task.url, function(err, res, body) {
+        if (err) return done(err);
+        if (res.statusCode != 200) return done(res.statusCode);
+        // ...
+        done();
+    });
+}, 5);
+
 
 app.use(express.static('public'));
 
