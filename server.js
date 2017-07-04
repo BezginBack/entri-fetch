@@ -10,6 +10,9 @@ function parseIt(q, callback){
     if (!err && page.statusCode == 200) {
       var dom = new JSDOM(body);
       var doc = dom.window.document;
+      if (doc.getElementById("topic")){
+
+      }
       var url = page.request.uri.href;
       data += "<div>" + url + "</div>";
       if(doc.getElementsByClassName("pager")[0]){
@@ -31,6 +34,7 @@ app.get("/", function (req, res) {
   if(req.query.search){
     var q = req.query.search;
     parseIt(q, function(err, data){
+      if(err) res.end(err);
       res.writeHead(200, {"content-type" : "text/html"});
       res.write(data);
       res.end();
