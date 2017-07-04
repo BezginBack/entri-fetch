@@ -50,12 +50,12 @@ app.get("/", function (req, res) {
     var data = "raw";
     var q = async.queue(function (task, done) {
       data = task.url;
-      done();  
+      done(null, data);  
     }, 2);
     for(var i = 0; i < 10; i++) {
       q.push({url: "https://eksisozluk.com/"+i});
     }
-    res.write(data); 
+    res.write(" " + q); 
     res.end();
   } else {
     res.sendFile(__dirname + '/views/index.html');
