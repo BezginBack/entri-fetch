@@ -7,7 +7,7 @@ var async = require("async");
 
 
 function parseIt(url, callback){
-  var data = "";
+  var data = [];
   request(url, function (err, page, body) {
     if (!err && page.statusCode == 200) {
       var dom = new JSDOM(body);
@@ -26,12 +26,12 @@ function parseIt(url, callback){
               var doc2 = dom2.window.document;
               var nodeList2 = doc2.getElementsByClassName("entry-date");
               for(var j = 0 ; j < nodeList2.length; j++){
-                data = "<div>" + nodeList2[j].innerHTML + "</div>";
+                data.push("<div>" + nodeList2[j].innerHTML + "</div>");
               }
               callback(null, data);
             }); 
             done();  
-          }, 5);
+          }, 1);
           for(var i = 1; i <= pageCounter; i++) {
             q.push({url: url+"?p="+i});
           }    
@@ -54,6 +54,7 @@ app.get("/", function (req, res) {
     res.writeHead(200, {"content-type" : "text/html"});
     parseIt(url, function(err, data){
       if(err) res.end(err);
+      fo
       res.write(data);
     });
     //res.end();
