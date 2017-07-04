@@ -5,7 +5,7 @@ var jsdom = require("jsdom");
 var { JSDOM } = jsdom;
 var async = require("async");
 
-/*
+
 function parseIt(url, callback){
   var data = "";
   request(url, function (err, page, body) {
@@ -33,26 +33,24 @@ function parseIt(url, callback){
     }
   });
 }
-*/
 
 
 var q = async.queue(function (task, done) {
-    request(task.url, function(err, res, body) {
-        if (!err && res.statusCode == 200) {
-          done();
-        }
-    });
-}, 5);
+  var data = "";
+  parseIt(task.url, callback) ;
+  done();  
+}, 2);
 
-q.push({url: "https://eksisozluk.com/"});
+
 
 app.use(express.static('public'));
 
 app.get("/", function (req, res) {
   if(req.query.search){
-    var q = req.query.search;
-    var url = 'https://eksisozluk.com/' + q;
+    //var q = req.query.search;
+    //var url = 'https://eksisozluk.com/' + q;
     res.writeHead(200, {"content-type" : "text/plain"});
+    q.push({url: "https://eksisozluk.com/"});
     //parseIt(url, function(err, data){
       //if(err) res.end(err);
       //res.write(data);
