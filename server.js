@@ -9,28 +9,22 @@ function parseIt(url, callback){
   var data = [];
   request(url, function (err, page, body) {
     if (!err && page.statusCode == 200) {
-      var $ = cheerio.load(body);
-      if ($("#topic")){
-        if($("#topic").data("not-found") == null){
-          var url = page.request.uri.href;
-          var pageCounter = parseInt($(".pager:nth-child(0)").data("pagecount"));
-          var q = async.queue(function (task, done) {
-            request(task.url, function (err, page, body2){
-              var $ = cheerio.load(body2);
-              var nodeList2 = $(".entry-date");
-              var nodeList3 = $(".entry-author");
-              for(var j = 0 ; j < nodeList2.length; j++){
-                  data.push("<div>" + task.id + " ~ "+ nodeList3[j].innerHTML + " ~ " + nodeList2[j].innerHTML + "</div>");
-              }
-              done();
-              callback(null, data);
-            }); 
-          }, 1);
-          for(var i = 1; i <= pageCounter; i++) {
-            q.push({url: url+"?p="+i, id: i});
-          }    
-        }
-      }
+      var $ = cheerio.load(body);      
+      var url = page.request.uri.href;
+      var pageCounter = parseInt($(".pager:eq(0)").data("pagecount"));
+      var q = async.queue(function (task, done) {
+        request(task.url, function (err, page, body2){
+          var $ = cheerio.load(body2);
+          for(var j = 0 ; j < 10; j++){
+              data.push("<div>" + task.id + "</div>");
+          }
+          done();
+          callback(null, data);
+        }); 
+      }, 1);
+      for(var i = 1; i <= pageCounter; i++) {
+        q.push({url: url+"?p="+i, id: i});
+      }    
     } else {
       callback(null, "error or bad search");
     }
