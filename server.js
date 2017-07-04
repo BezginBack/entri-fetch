@@ -29,8 +29,8 @@ function parseIt(url, callback){
                 data.push("<div>" + nodeList2[j].innerHTML + "</div>");
               }
               callback(null, data);
+              done();
             }); 
-            done();  
           }, 1);
           for(var i = 1; i <= pageCounter; i++) {
             q.push({url: url+"?p="+i});
@@ -54,8 +54,9 @@ app.get("/", function (req, res) {
     res.writeHead(200, {"content-type" : "text/html"});
     parseIt(url, function(err, data){
       if(err) res.end(err);
-      fo
-      res.write(data);
+      for(var i = 0; i < data.length; i++){
+        res.write(data[i]);  
+      }
     });
     //res.end();
   } else {
