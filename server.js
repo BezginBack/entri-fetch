@@ -12,8 +12,10 @@ function parseIt(q, callback){
       var doc = dom.window.document;
       var url = page.request.uri.href;
       data += "<div>" + url + "</div>";
-      var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
-      data += "<div>" + pageCounter + "</div>";
+      if(doc.getElementsByClassName("pager")[0]){
+        var pageCounter = doc.getElementsByClassName("pager")[0].getAttribute("data-pagecount");
+        data += "<div>" + pageCounter + "</div>";
+      }
       var nodeList = doc.getElementsByClassName("entry-date");
       for(var j = 0 ; j < nodeList.length; j++){
         data += "<div>" + nodeList[j].innerHTML + "</div>";
@@ -30,7 +32,7 @@ app.get("/", function (req, res) {
     var q = req.query.search;
     parseIt(q, function(err, data){
       res.writeHead(200, {"content-type" : "text/html"});
-      res.write(" " + data);
+      res.write(data);
       res.end();
     });
   } else {
