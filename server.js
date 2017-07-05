@@ -16,29 +16,30 @@ function parseIt(url, callback){
         var url = page.request.uri.href;
         var pageCounter = parseInt($(".pager").eq(0).data("pagecount"));
         if(pageCounter > 0){
-                  var pages = [];
-        for(var i = 1; i <= pageCounter; i++) {
-          pages.push(url+"?p="+i);
-        }
-        async.mapLimit(pages, 10, function(url, done) {
-          request(url, function(error, response, html) {
-            var $ = cheerio.load(html);
-            for(var j = 0 ; j < $(".entry-date").get().length; j++){
-              arr.push($(".entry-author").eq(j).text());
-              data += "<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>";
-            }
-            done(error, response);
+          var pages = [];
+          for(var i = 1; i <= pageCounter; i++) {
+            pages.push(url+"?p="+i);
+          }
+          async.mapLimit(pages, 10, function(url, done) {
+            request(url, function(error, response, html) {
+              var $ = cheerio.load(html);
+              for(var j = 0 ; j < $(".entry-date").get().length; j++){
+                arr.push($(".entry-author").eq(j).text());
+                data += "<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>";
+              }
+              done(error, response);
+            });
+          }, function(err, results) {
+            data += "<div>" + arr.length + " entry are shown.</div>";
+            callback(null, data);
           });
-        }, function(err, results) {
-          data += "<div>" + arr.length + " entry are shown.</div>";
-          callback(null, data);
-        });
         } else {
           for(var k = 0 ; k < $(".entry-date").get().length; k++){
             arr.push($(".entry-author").eq(k).text());
             data += "<div>" + $(".entry-author").eq(k).text() + " ~ " + $(".entry-date").eq(k).text() + "</div>";
           }
-          callback();
+          data += "<div>" + arr.length + " entry are shown.</div>";
+          callback(null, data);
         }
       }
     } else {
@@ -59,7 +60,7 @@ app.get("/", function (req, res) {
       if(err) res.end(err);
       if(data == "err") res.end("error or bad search");
       res.write(data);
-      if(data[data.length-1] == ".") res.end();
+      if(data[data.length-7] == ".") res.end();
     });
   } else {
     res.sendFile(__dirname + '/views/index.html');
