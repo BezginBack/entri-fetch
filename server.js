@@ -25,11 +25,11 @@ function parseIt(url, callback){
             for(var j = 0 ; j < $(".entry-date").get().length; j++){
               arr.push("<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>");
             }
-            //done();
-            callback(error, arr);
+            //callback(null, html);
+            done(error, html);
           });
         }, function(err, results) {
-          callback(err, results);
+
         });
         /*var q = async.queue(function (task, done) {
           request(task.url, function (err, page, body2){
