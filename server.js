@@ -23,12 +23,13 @@ function parseIt(url, callback){
           request(url, function(error, response, html) {
             var $ = cheerio.load(html);
             for(var j = 0 ; j < $(".entry-date").get().length; j++){
-              //arr.push("<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>");
+              arr.push($(".entry-author").eq(j).text());
               data += "<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>";
             }
             done(error, response);
           });
         }, function(err, results) {
+          data += "<div>" + arr.length + " adet entry basıldı.</div>";
           callback(null, data);
         });
         /*var q = async.queue(function (task, done) {
@@ -66,6 +67,7 @@ app.get("/", function (req, res) {
         //res.write(data[i]);
       //}
       res.write(data);
+      if(data[data.length-1] == ".") res.end();
     });
   } else {
     res.sendFile(__dirname + '/views/index.html');
