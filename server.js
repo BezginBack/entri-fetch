@@ -4,7 +4,6 @@ var request = require("request");
 var async = require("async");
 var cheerio = require("cheerio");
 
-
 function parseIt(url, callback){
   var data = "";
   request(url, function (err, page, body) {
@@ -24,7 +23,7 @@ function parseIt(url, callback){
             done();
             callback(null, data);
           }); 
-        }, 1);
+        }, 10);
         for(var i = 1; i <= pageCounter; i++) {
           q.push({url: url+"?p="+i, id: i});
         }
