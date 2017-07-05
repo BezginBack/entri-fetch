@@ -29,22 +29,9 @@ function parseIt(url, callback){
             done(error, response);
           });
         }, function(err, results) {
-          data += "<div>" + arr.length + " adet entry basıldı.</div>";
+          data += "<div>" + arr.length + " entry are shown.</div>";
           callback(null, data);
         });
-        /*var q = async.queue(function (task, done) {
-          request(task.url, function (err, page, body2){
-            var $ = cheerio.load(body2);
-            for(var j = 0 ; j < $(".entry-date").get().length; j++){
-              data += "<div>" + task.id + " ~ " + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>";
-            }
-            done();
-            callback(null, data);
-          }); 
-        }, 10);*/
-        /*for(var i = 1; i <= pageCounter; i++) {
-          q.push({url: url+"?p="+i, id: i});
-        }*/
       }
     } else {
       callback(null, "err");
@@ -63,9 +50,6 @@ app.get("/", function (req, res) {
     parseIt(url, function(err, data){
       if(err) res.end(err);
       if(data == "err") res.end("error or bad search");
-      //for(var i = 0; i < data.length; i++){
-        //res.write(data[i]);
-      //}
       res.write(data);
       if(data[data.length-1] == ".") res.end();
     });
