@@ -6,6 +6,7 @@ var cheerio = require("cheerio");
 
 function parseIt(url, callback){
   var data = "";
+  var arr = [];
   request(url, function (err, page, body) {
     if (!err && page.statusCode == 200) {
       var $ = cheerio.load(body);
@@ -22,12 +23,13 @@ function parseIt(url, callback){
           request(url, function(error, response, html) {
             var $ = cheerio.load(html);
             for(var j = 0 ; j < $(".entry-date").get().length; j++){
-              data += "<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>";
+              arr.push("<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>");
             }
-            callback(error, data);
+            //done();
+            callback(error, arr);
           });
         }, function(err, results) {
-              
+          callback(err, results);
         });
         /*var q = async.queue(function (task, done) {
           request(task.url, function (err, page, body2){
@@ -60,7 +62,9 @@ app.get("/", function (req, res) {
     parseIt(url, function(err, data){
       if(err) res.end(err);
       if(data == "err") res.end("error or bad search");
-      res.write(data);  
+      for(var i = 0; i < data.length; i++){
+        res.write(data[i]);
+      }
     });
   } else {
     res.sendFile(__dirname + '/views/index.html');
