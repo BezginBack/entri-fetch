@@ -14,7 +14,11 @@ function parseIt(url, callback){
       } else {
         var url = page.request.uri.href;
         var pageCounter = parseInt($(".pager").eq(0).data("pagecount"));
-        var q = async.queue(function (task, done) {
+        var pages = [];
+        for(var i = 1; i <= pageCounter; i++) {
+          pages.push({url: url+"?p="+i, id: i});
+        }
+        /*var q = async.queue(function (task, done) {
           request(task.url, function (err, page, body2){
             var $ = cheerio.load(body2);
             for(var j = 0 ; j < $(".entry-date").get().length; j++){
@@ -23,10 +27,10 @@ function parseIt(url, callback){
             done();
             callback(null, data);
           }); 
-        }, 10);
-        for(var i = 1; i <= pageCounter; i++) {
+        }, 10);*/
+        /*for(var i = 1; i <= pageCounter; i++) {
           q.push({url: url+"?p="+i, id: i});
-        }
+        }*/
       }
     } else {
       callback(null, "err");
