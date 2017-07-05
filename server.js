@@ -23,13 +23,13 @@ function parseIt(url, callback){
           request(url, function(error, response, html) {
             var $ = cheerio.load(html);
             for(var j = 0 ; j < $(".entry-date").get().length; j++){
-              arr.push("<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>");
+              //arr.push("<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>");
+              data += "<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>";
             }
-            //callback(null, html);
-            done(error, html);
+            done(error, response);
           });
         }, function(err, results) {
-          callback(null, arr);
+          callback(null, data);
         });
         /*var q = async.queue(function (task, done) {
           request(task.url, function (err, page, body2){
@@ -62,9 +62,10 @@ app.get("/", function (req, res) {
     parseIt(url, function(err, data){
       if(err) res.end(err);
       if(data == "err") res.end("error or bad search");
-      for(var i = 0; i < data.length; i++){
-        res.write(data[i]);
-      }
+      //for(var i = 0; i < data.length; i++){
+        //res.write(data[i]);
+      //}
+      res.write(data);
     });
   } else {
     res.sendFile(__dirname + '/views/index.html');
