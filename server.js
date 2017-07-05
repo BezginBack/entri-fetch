@@ -18,9 +18,13 @@ function parseIt(url, callback){
         for(var i = 1; i <= pageCounter; i++) {
           pages.push(url+"?p="+i);
         }
-        async.map(pages, function(url, callback) {
+        async.mapLimit(pages, 10, function(url, callback) {
           request(url, function(error, response, html) {
-            callback(error, html);
+            var $ = cheerio.load(html);
+            for(var j = 0 ; j < $(".entry-date").get().length; j++){
+              data += "<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>";
+            }
+            callback(error, data);
           });
         }, function(err, results) {
               
