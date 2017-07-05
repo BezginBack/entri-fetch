@@ -15,7 +15,8 @@ function parseIt(url, callback){
       } else {
         var url = page.request.uri.href;
         var pageCounter = parseInt($(".pager").eq(0).data("pagecount"));
-        var pages = [];
+        if(pageCounter > 0){
+                  var pages = [];
         for(var i = 1; i <= pageCounter; i++) {
           pages.push(url+"?p="+i);
         }
@@ -32,6 +33,13 @@ function parseIt(url, callback){
           data += "<div>" + arr.length + " entry are shown.</div>";
           callback(null, data);
         });
+        } else {
+          for(var k = 0 ; k < $(".entry-date").get().length; k++){
+            arr.push($(".entry-author").eq(k).text());
+            data += "<div>" + $(".entry-author").eq(k).text() + " ~ " + $(".entry-date").eq(k).text() + "</div>";
+          }
+          callback();
+        }
       }
     } else {
       callback(null, "err");
