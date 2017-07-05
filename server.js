@@ -16,8 +16,15 @@ function parseIt(url, callback){
         var pageCounter = parseInt($(".pager").eq(0).data("pagecount"));
         var pages = [];
         for(var i = 1; i <= pageCounter; i++) {
-          pages.push({url: url+"?p="+i, id: i});
+          pages.push(url+"?p="+i);
         }
+        async.map(pages, function(url, callback) {
+          request(url, function(error, response, html) {
+            callback(error, html);
+          });
+        }, function(err, results) {
+              
+        });
         /*var q = async.queue(function (task, done) {
           request(task.url, function (err, page, body2){
             var $ = cheerio.load(body2);
