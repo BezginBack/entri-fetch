@@ -29,7 +29,7 @@ function parseIt(url, callback){
             done(error, html);
           });
         }, function(err, results) {
-
+          callback(null, arr);
         });
         /*var q = async.queue(function (task, done) {
           request(task.url, function (err, page, body2){
