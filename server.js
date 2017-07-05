@@ -18,7 +18,7 @@ function parseIt(url, callback){
         for(var i = 1; i <= pageCounter; i++) {
           pages.push(url+"?p="+i);
         }
-        async.mapLimit(pages, 10, function(url, callback) {
+        async.mapLimit(pages, 10, function(url, done) {
           request(url, function(error, response, html) {
             var $ = cheerio.load(html);
             for(var j = 0 ; j < $(".entry-date").get().length; j++){
