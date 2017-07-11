@@ -13,7 +13,8 @@ function parseIt(url, callback){
       if($("#topic").data("not-found") == "true"){
         callback(null, "err");
       } else {
-        var url = page.request.uri.href;
+        //var url = page.request.uri.href;
+        var url = "https://www.eksisozluk.com/" + $("#title").eq(0).data("slug") + "--" + $("#title").eq(0).data("id");
         var pageCounter = parseInt($(".pager").eq(0).data("pagecount"));
         if(pageCounter > 0){
           var pages = [];
