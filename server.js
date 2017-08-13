@@ -58,7 +58,7 @@ app.get("/", function (req, res) {
     var q = req.query.search;
     //var url = 'https://eksisozluk.com/' + q;
     var url = 'https://poll-maker-bezginback.c9users.io';
-    res.writeHead(200, {"content-type" : "text/html"});
+    res.writeHead(200, {"content-type" : "text/plain"});
     //parseIt(url, function(err, data){
       //if(err) res.end(err);
       //if(data == "err") res.end("error or bad search");
