@@ -66,7 +66,7 @@ app.get("/", function (req, res) {
       //if(data[data.length-7] == ".") res.end();
     //});
     eksisozluk.entries.get(1, function(result) {
-      res.end(result);
+      res.end(result.status);
     });
   } else {
     res.sendFile(__dirname + '/views/index.html');
