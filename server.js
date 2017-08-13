@@ -65,7 +65,7 @@ app.get("/", function (req, res) {
       //if(data[data.length-7] == ".") res.end();
     //});
     request(url, function (err, page, body) {
-      res.end(err);
+      res.end(body);
     });
   } else {
     res.sendFile(__dirname + '/views/index.html');
