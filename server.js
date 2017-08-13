@@ -4,6 +4,7 @@ var request = require("request");
 var async = require("async");
 var cheerio = require("cheerio");
 var eksisozluk = require('eksisozluk');
+var rp = require("request-promise");
 
 function parseIt(url, callback){
   var data = "";
@@ -65,8 +66,12 @@ app.get("/", function (req, res) {
       //res.write(data);
       //if(data[data.length-7] == ".") res.end();
     //});
-    eksisozluk.entries.get("pepe", result => {
-      res.end(result.status);
+    rp(url)
+    .then(function (htmlString) {
+        res.end(htmlString);
+    })
+    .catch(function (err) {
+        res.end(err);
     });
   } else {
     res.sendFile(__dirname + '/views/index.html');
