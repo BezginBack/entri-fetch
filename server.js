@@ -68,7 +68,7 @@ app.get("/", function (req, res) {
       //res.write(data);
       //if(data[data.length-7] == ".") res.end();
     //});
-    res.end(dom.window.location);
+    res.end(dom.url);
   }
 });
 
