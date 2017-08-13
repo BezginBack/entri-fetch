@@ -4,6 +4,9 @@ var request = require("request");
 var async = require("async");
 var cheerio = require("cheerio");
 var rp = require("request-promise");
+var jsdom = require('jsdom');
+var { JSDOM } = jsdom;
+var dom = new JSDOM();
 
 function parseIt(url, callback){
   var data = "";
@@ -65,15 +68,7 @@ app.get("/", function (req, res) {
       //res.write(data);
       //if(data[data.length-7] == ".") res.end();
     //});
-    rp(url)
-    .then(function (htmlString) {
-        res.end(htmlString);
-    })
-    .catch(function (err) {
-        res.end(err);
-    });
-  } else {
-    res.sendFile(__dirname + '/views/index.html');
+    res.end(dom.window.location);
   }
 });
 
