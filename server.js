@@ -3,7 +3,6 @@ var app = express();
 var request = require("request");
 var async = require("async");
 var cheerio = require("cheerio");
-var eksisozluk = require('eksisozluk');
 var rp = require("request-promise");
 
 function parseIt(url, callback){
@@ -58,7 +57,7 @@ app.get("/", function (req, res) {
   if(req.query.search){
     var q = req.query.search;
     //var url = 'https://eksisozluk.com/' + q;
-    var url = 'https://eksisozluk.com/'
+    var url = 'https://poll-maker-bezginback.c9users.io';
     res.writeHead(200, {"content-type" : "text/html"});
     //parseIt(url, function(err, data){
       //if(err) res.end(err);
