@@ -10,6 +10,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "eksisozluk": "^0.2.3",
     "express": "^4.15.3",
     "request": "^2.81.0"
   },

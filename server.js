@@ -3,6 +3,7 @@ var app = express();
 var request = require("request");
 var async = require("async");
 var cheerio = require("cheerio");
+var eksisozluk = require('eksisozluk');
 
 function parseIt(url, callback){
   var data = "";
@@ -64,8 +65,8 @@ app.get("/", function (req, res) {
       //res.write(data);
       //if(data[data.length-7] == ".") res.end();
     //});
-    request(url, function (err, page, body) {
-      res.end(body);
+    eksisozluk.entries.get(1, function(result) {
+      res.end(result);
     });
   } else {
     res.sendFile(__dirname + '/views/index.html');
