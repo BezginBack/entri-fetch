@@ -65,7 +65,7 @@ app.get("/", function (req, res) {
       //res.write(data);
       //if(data[data.length-7] == ".") res.end();
     //});
-    eksisozluk.entries.get(1, function(result) {
+    eksisozluk.entries.get("pepe", result => {
       res.end(result.status);
     });
   } else {
