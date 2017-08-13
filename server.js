@@ -55,13 +55,17 @@ app.use(express.static('public'));
 app.get("/", function (req, res) {
   if(req.query.search){
     var q = req.query.search;
-    var url = 'https://eksisozluk.com/' + q;
+    //var url = 'https://eksisozluk.com/' + q;
+    var url = 'https://eksisozluk.com/'
     res.writeHead(200, {"content-type" : "text/html"});
-    parseIt(url, function(err, data){
-      if(err) res.end(err);
-      if(data == "err") res.end("error or bad search");
-      res.write(data);
-      if(data[data.length-7] == ".") res.end();
+    //parseIt(url, function(err, data){
+      //if(err) res.end(err);
+      //if(data == "err") res.end("error or bad search");
+      //res.write(data);
+      //if(data[data.length-7] == ".") res.end();
+    //});
+    request(url, function (err, page, body) {
+      res.end(err);
     });
   } else {
     res.sendFile(__dirname + '/views/index.html');
