@@ -8,6 +8,8 @@ var jsdom = require('jsdom');
 var { JSDOM } = jsdom;
 var dom = new JSDOM();
 
+var url = "https://www.eksisozluk.com/";
+
 /*function parseIt(url, callback){
   var data = "";
   var arr = [];
@@ -58,6 +60,9 @@ app.use(express.static('public'));
 
 app.route("/")
     .get(function (req, res) {
+    request(url, function (err, page, body) {
+      res.send(body);
+    });
   });
 
 app.listen(process.env.PORT, function () {
