@@ -57,14 +57,13 @@ var url = "https://www.eksisozluk.com/";
 
 app.use(express.static('public'));
 app.use('/views', express.static(__dirname + '/views'));
-//app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'pug')
 
 app.route("/")
     .get(function (req, res) {
     request(url, function (err, page, body) {
       if (err) res.send(err);
-      //res.render(__dirname + '/views/index.html')
-      res.send();
+      res.render('index', { title: 'Hey', message: 'Hello there!' })
     });
   });
 
