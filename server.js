@@ -61,10 +61,14 @@ app.set('view engine', 'pug')
 
 app.route("/")
     .get(function (req, res) {
-    request(url, function (err, page, body) {
-      if (err) res.send(err);
-      res.render('index', { title: 'Hey', message: 'Hello there!' })
-    });
+    if(req.query.search){
+      request(url, function (err, page, body) {
+        if (err) res.send(err);
+        res.send(req.query.search);
+      });
+    } else {
+      res.render('index', { title: 'Hey', message: req.query.search });
+    }
   });
 
 app.listen(process.env.PORT, function () {
