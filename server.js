@@ -55,16 +55,15 @@ var url = "https://www.eksisozluk.com/";
   });
 }*/
 
-
 app.use(express.static('public'));
 app.use('/views', express.static(__dirname + '/views'));
-
+app.engine('html', require('ejs').renderFile);
 
 app.route("/")
     .get(function (req, res) {
     request(url, function (err, page, body) {
       if (err) res.send(err);
-      res.sendFile(__dirname + '/views/index.html');
+      res.render(__dirname + '/views/index.html')
     });
   });
 
