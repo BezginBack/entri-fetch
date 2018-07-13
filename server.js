@@ -1,5 +1,6 @@
 var express = require("express");
 var app = express();
+var parser = require("./models/parser.js");
 var request = require("request");
 var async = require("async");
 var cheerio = require("cheerio");
@@ -65,12 +66,17 @@ app.route("/")
       var data = {};
       request(url, function (err, page, body) {
         if (err) res.send(err);
-        data = {
+        parser.parseHtml(body, function(err, info){
+          if (err) {
+            data.content = err;
+            
+          data = {
           'isSearched': true,
           'title': 'Result',
-          'content': body
-        };
-        res.render('index', {data: data});
+          'content': info
+          };
+          res.render('index', {data: data});
+        });
       });
     } else {
       data = {
