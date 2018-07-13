@@ -8,7 +8,7 @@ var jsdom = require('jsdom');
 var { JSDOM } = jsdom;
 var dom = new JSDOM();
 
-function parseIt(url, callback){
+/*function parseIt(url, callback){
   var data = "";
   var arr = [];
   request(url, function (err, page, body) {
@@ -51,27 +51,18 @@ function parseIt(url, callback){
       callback(null, "err");
     }
   });
-}
+}*/
 
 
 app.use(express.static('public'));
 
-app.get("/", function (req, res) {
-  if(req.query.search){
-    var q = req.query.search;
-    //var url = 'https://eksisozluk.com/' + q;
-    var url = 'https://poll-maker-bezginback.c9users.io';
-    res.writeHead(200, {"content-type" : "text/plain"});
-    //parseIt(url, function(err, data){
-      //if(err) res.end(err);
-      //if(data == "err") res.end("error or bad search");
-      //res.write(data);
-      //if(data[data.length-7] == ".") res.end();
-    //});
-    res.end(dom.url);
-  }
-});
+app.route("/")
+    .get(function (req, res) {
+  });
 
-var listener = app.listen(8080, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+app.listen(process.env.PORT, function () {
+  var date = new Date(Date.now());
+  var time = date.toLocaleTimeString('en-US', { hour12: false });
+  var day = date.toDateString();
+  console.log('Server listening :\n', 'Port:', process.env.PORT, 'Time :', day + ' ' + time);
 });
