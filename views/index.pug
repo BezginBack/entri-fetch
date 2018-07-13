@@ -8,8 +8,9 @@ html
   link(rel="stylesheet", href="/style.css")
   body
     main
-    if data.isSe   
-      p= data.key
+    if data.isSearched
+      div.result= data.content
+    else
       form(method="get")
         input(class="search", type="search", name="search")
     footer

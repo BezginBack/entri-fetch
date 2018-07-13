@@ -68,15 +68,13 @@ app.route("/")
         data = {
           'isSearched': true,
           'title': 'Result',
-          'key': req.query.search
+          'content': body
         };
         res.render('index', {data: data});
       });
     } else {
       data = {
-          'isSearched': false,
           'title': 'Hello',
-          'key': ""
       };
       res.render('index', {data: data});
     }
