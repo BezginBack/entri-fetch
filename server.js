@@ -63,18 +63,16 @@ app.set('view engine', 'pug')
 app.route("/")
     .get(function (req, res) {
     if(req.query.search){
+      var q = '/' + req.query.search; 
       var data = {};
-      request(url, function (err, page, body) {
+      request(url + q, function (err, page, body) {
         if (err) res.send(err);
-        parser.parseHtml(body, function(err, info){
-          if (err) {
-            data.content = err;
-            
-          data = {
-          'isSearched': true,
-          'title': 'Result',
-          'content': info
-          };
+        parser.parseHtml(body, function(info){
+            data = {
+              'isSearched': true,
+              'title': 'Result',
+              'content': info
+            };
           res.render('index', {data: data});
         });
       });
