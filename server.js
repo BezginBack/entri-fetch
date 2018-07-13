@@ -66,17 +66,19 @@ app.route("/")
       request(url, function (err, page, body) {
         if (err) res.send(err);
         data = {
+          'isSearched': true,
           'title': 'Result',
           'key': req.query.search
         };
-        res.render('index', data);
+        res.render('index', {data: data});
       });
     } else {
       data = {
+          'isSearched': false,
           'title': 'Hello',
-          'key': null
+          'key': ""
       };
-      res.render('index', data);
+      res.render('index', {data: data});
     }
   });
 
