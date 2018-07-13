@@ -58,10 +58,14 @@ var url = "https://www.eksisozluk.com/";
 
 app.use(express.static('public'));
 
+
+
+
 app.route("/")
     .get(function (req, res) {
     request(url, function (err, page, body) {
-      res.send(body);
+      if (err) res.send(err);
+      res.send(page);
     });
   });
 
