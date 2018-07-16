@@ -72,7 +72,12 @@ app.route("/")
             data = {
               'isSearched': true,
               'title': 'Result',
-              'content': info
+              'content': {
+                'paceCount' : info.pageCounter,
+                'dataTitle' : ("#title").eq(0).data("title"),
+        'dataId' : $("#title").eq(0).data("id")
+                
+              }
             };
           res.render('index', {data: data});
         });
