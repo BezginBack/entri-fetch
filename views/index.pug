@@ -10,7 +10,7 @@ html
     main
     if data.isSearched
       if data.content.dataId
-        div.result= data.content.pageCounter
+        div.result= data.content.pageCounter + ' pages'
     else
       form(method="get")
         input(class="search", type="search", name="search")
