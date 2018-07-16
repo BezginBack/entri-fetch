@@ -9,7 +9,8 @@ html
   body
     main
     if data.isSearched
-      div.result= data.content
+      if data.content.dataId
+        div.result= data.content.pageCounter
     else
       form(method="get")
         input(class="search", type="search", name="search")
