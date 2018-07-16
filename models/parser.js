@@ -6,6 +6,8 @@ exports.parseHtml = function(body, callback){
       callback('no entry');
     } else {
       var pageCounter = $(".pager").eq(0).data("pagecount");
+      var title = $("#title").eq(0).data("slug")
+      var title = $("#title").eq(0).data("slug")
       callback(pageCounter);
     }
 }
