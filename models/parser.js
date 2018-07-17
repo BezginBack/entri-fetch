@@ -10,7 +10,6 @@ exports.parseHtml = function(body, callback){
       'dataTitle' : $("#title").eq(0).data("title"),
       'dataId' : $("#title").eq(0).data("id")
     };
-    console.log(pageInfo);
     callback(pageInfo);
   }
 }
