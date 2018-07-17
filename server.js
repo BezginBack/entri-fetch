@@ -89,9 +89,11 @@ app.route("/")
   }
   });
 
-app.route("/entries")
-  .get(function (req, res) {
-
+app.route("/api/entries")
+  .post(function (req, res) {
+  if(req.query.search){
+    console.log("ok");
+  }
 });
 
 app.listen(process.env.PORT, function () {
