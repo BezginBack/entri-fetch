@@ -92,6 +92,7 @@ app.route("/")
 app.route("/entries")
   .post(function (req, res) {
     console.log(req.body);
+    res.send("ok");
 });
 
 app.listen(process.env.PORT, function () {

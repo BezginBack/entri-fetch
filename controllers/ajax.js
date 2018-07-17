@@ -7,7 +7,6 @@ $('document').ready(function(){
     
   };
   $('.continue').on('click', function(){
-    console.log(appUrl);
     $.ajax({
       type: 'post',
       url : appUrl + '/entries',
@@ -15,7 +14,7 @@ $('document').ready(function(){
       dataType : 'json',
       //beforeSend : waitFunction,
       error : function(err){
-             
+          console.log(err);
       },
       success : function(res){
           console.log(res);
