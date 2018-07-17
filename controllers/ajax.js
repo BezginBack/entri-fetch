@@ -1,8 +1,5 @@
 var appUrl = window.location.origin;
 $('document').ready(function(){
-  var data = {
-    'info' : 'info'
-  };
   var waitFunction = function(){
     
   };
@@ -10,8 +7,8 @@ $('document').ready(function(){
     $.ajax({
       type: 'post',
       url : appUrl + '/entries',
-      data : data,
-      dataType : 'json',
+      data : 'info',
+      //dataType : 'json',
       //beforeSend : waitFunction,
       error : function(err){
           console.log(err);
