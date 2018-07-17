@@ -11,6 +11,7 @@ html
     if data.isSearched
       if data.content.dataId
         div.result= data.content.pageCounter + ' pages'
+          a(href='') countinue?
     else
       form(method="get")
         input(class="search", type="search", name="search")

@@ -89,6 +89,11 @@ app.route("/")
   }
   });
 
+app.route("/entries")
+  .get(function (req, res) {
+
+});
+
 app.listen(process.env.PORT, function () {
   var date = new Date(Date.now());
   var time = date.toLocaleTimeString('en-US', { hour12: false });
