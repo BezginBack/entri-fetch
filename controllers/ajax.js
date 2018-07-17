@@ -13,12 +13,12 @@ $('document').ready(function(){
       url : appUrl + '/entries',
       data : data,
       dataType : 'json',
-      beforeSend : waitFunction,
+      //beforeSend : waitFunction,
       error : function(err){
              
       },
       success : function(res){
-          
+          console.log(res);
       }
     });  
   });
