@@ -62,31 +62,31 @@ app.use('/controllers', express.static(__dirname + '/controllers'));
 app.set('view engine', 'pug')
 
 app.route("/")
-    .get(function (req, res) {
-    if(req.query.search){
-      var q = '/' + req.query.search; 
-      var data = {};
-      request(url + q, function (err, page, body) {
-        if (err) res.send(err);
-        parser.parseHtml(body, function(info){
-            data = {
-              'isSearched': true,
-              'title': 'Result',
-              'content': {
-                'pageCounter' : info.pageCounter,
-                'dataTitle' : info.dataTitle,
-                'dataId' : info.dataId                
-              }
-            };
-          res.render('index', {data: data});
-        });
+  .get(function (req, res) {
+  if(req.query.search){
+    var q = '/' + req.query.search; 
+    var data = {};
+    request(url + q, function (err, page, body) {
+      if (err) res.send(err);
+      parser.parseHtml(body, function(info){
+          data = {
+            'isSearched': true,
+            'title': 'Result',
+            'content': {
+              'pageCounter' : info.pageCounter,
+              'dataTitle' : info.dataTitle,
+              'dataId' : info.dataId                
+            }
+          };
+        res.render('index', {data: data});
       });
-    } else {
-      data = {
-          'title': 'Hello',
-      };
-      res.render('index', {data: data});
-    }
+    });
+  } else {
+    data = {
+        'title': 'Hello',
+    };
+    res.render('index', {data: data});
+  }
   });
 
 app.listen(process.env.PORT, function () {
