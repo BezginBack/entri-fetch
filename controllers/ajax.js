@@ -5,12 +5,14 @@ $('document').ready(function(){
   };
   $('.continue').on('click', function(){
     var data = {
-    
+      'dataPagecounter' : $('.continue').data('pagecounter'),
+      'dataPagetitle' : $('.continue').data('title'),
+      'dataPageid' : $('.continue').data('id')
     };
     $.ajax({
       type: 'post',
       url : appUrl + '/entries',
-      data : 'info',
+      data : data,
       dataType : 'json',
       beforeSend : waitFunction,
       error : function(err){

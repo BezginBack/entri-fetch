@@ -95,8 +95,10 @@ app.route("/")
 
 app.route("/entries")
   .post(function (req, res) {
-    console.log(req.body);
-    res.send("ok");
+    var post = {
+      'id' : req.body.dataPageid,
+    };
+    res.send(post);
 });
 
 app.listen(process.env.PORT, function () {
