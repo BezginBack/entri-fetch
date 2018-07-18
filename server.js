@@ -100,12 +100,14 @@ app.route("/entries")
   } else {
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
   }
-    var post = {
-      'count' : req.body.dataPagecounter,
-      'title' : req.body.dataPagetitle,
-      'id' : req.body.dataPageid,
-    };
+  request(newUrl, function (err, page, body) {
+    var $ = cheerio.load(body);
+    var post = "";
+    for(var j = 0 ; j < $(".entry-date").get().length; j++){
+      post += "<div>" + $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text() + "</div>";
+    }
     res.send(post);
+  });          
 });
 
 app.listen(process.env.PORT, function () {
