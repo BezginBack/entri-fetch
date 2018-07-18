@@ -12,9 +12,14 @@ html
     main
     if data.isSearched
       if data.content.dataId
-        div.result= data.content.pageCounter + ' pages'
-          span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
-          span(class='mainpage') mainpage?
+        if data.content.pageCounter
+          div.result= data.content.pageCounter + ' pages'
+            span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
+            span(class='mainpage')  mainpage?
+        else
+          div.result= '1 page'
+            span(class='continue', data-pagecounter=0, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
+            span(class='mainpage')  mainpage?
     else
       form(method="get")
         input(class="search", type="search", name="search")
