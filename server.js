@@ -105,8 +105,8 @@ app.route("/entries")
     var post = {};
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
       post['entry' + j] = $(".content").eq(j).text() + " - " + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text();
+      res.send($(".content").eq(j).text() + " - " + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text());
     }
-    res.send(post);
   });          
 });
 
