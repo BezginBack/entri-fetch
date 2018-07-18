@@ -95,7 +95,11 @@ app.route("/")
 
 app.route("/entries")
   .post(function (req, res) {
-  if ()
+  if (req.body.dataPagecounter > 0) {
+  
+  } else {
+    var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
+  }
     var post = {
       'count' : req.body.dataPagecounter,
       'title' : req.body.dataPagetitle,
