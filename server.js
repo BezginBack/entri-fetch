@@ -104,7 +104,7 @@ app.route("/entries")
     var $ = cheerio.load(body);
     var post = {};
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
-      post['entry' + j] = $(".entry-author").eq(j).text() + " ~ " + $(".entry-date").eq(j).text();
+      post['entry' + j] = $(".content").eq(j).text() + " - " + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text();
     }
     res.send(post);
   });          
