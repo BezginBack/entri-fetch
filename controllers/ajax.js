@@ -4,12 +4,15 @@ $('document').ready(function(){
     
   };
   $('.continue').on('click', function(){
+    var data = {
+    
+    };
     $.ajax({
       type: 'post',
       url : appUrl + '/entries',
       data : 'info',
-      //dataType : 'json',
-      //beforeSend : waitFunction,
+      dataType : 'json',
+      beforeSend : waitFunction,
       error : function(err){
           console.log(err);
       },

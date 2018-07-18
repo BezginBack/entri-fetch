@@ -13,7 +13,7 @@ html
     if data.isSearched
       if data.content.dataId
         div.result= data.content.pageCounter + ' pages'
-          span(class='continue')  countinue?
+          span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
     else
       form(method="get")
         input(class="search", type="search", name="search")

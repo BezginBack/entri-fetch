@@ -58,6 +58,8 @@ var url = "https://www.eksisozluk.com/";
   });
 }*/
 
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 app.use(express.static('public'));
 app.use('/views', express.static(__dirname + '/views'));
 app.use('/controllers', express.static(__dirname + '/controllers'));
