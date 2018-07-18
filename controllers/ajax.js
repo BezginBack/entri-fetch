@@ -23,4 +23,7 @@ $('document').ready(function(){
       }
     });  
   });
+  $('.mainpage').on('click', function(){
+    document.location.href = appUrl;
+  });
 });

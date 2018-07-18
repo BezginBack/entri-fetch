@@ -14,6 +14,7 @@ html
       if data.content.dataId
         div.result= data.content.pageCounter + ' pages'
           span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
+          span(class='mainpage') mainpage?
     else
       form(method="get")
         input(class="search", type="search", name="search")
