@@ -7,7 +7,7 @@ exports.parseHtml = function(body, callback){
   } else {
     var pageInfo = {
       'pageCounter' : $(".pager").eq(0).data("pagecount"),
-      'dataTitle' : $("#title").eq(0).data("title"),
+      'dataTitle' : $("#title").eq(0).data("slug"),
       'dataId' : $("#title").eq(0).data("id")
     };
     callback(pageInfo);

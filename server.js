@@ -95,6 +95,7 @@ app.route("/")
 
 app.route("/entries")
   .post(function (req, res) {
+  if ()
     var post = {
       'count' : req.body.dataPagecounter,
       'title' : req.body.dataPagetitle,
