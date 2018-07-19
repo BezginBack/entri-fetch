@@ -1,9 +1,7 @@
 var express = require("express");
 var app = express();
 var parser = require("./models/parser.js");
-var request = require("request");
 var bodyParser = require("body-parser");
-var cheerio = require("cheerio");
 
 var url = "https://www.eksisozluk.com/";
 
