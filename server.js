@@ -105,7 +105,7 @@ app.route("/entries")
     var post = {};
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
       post['entry' + j] = $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text();
-      console.log(JSON.stringify(post));
+      res.json(post);
     }
     
   });          
