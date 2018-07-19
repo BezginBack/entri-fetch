@@ -3,6 +3,9 @@ var app = express();
 var parser = require("./models/parser.js");
 var bodyParser = require("body-parser");
 
+var request = require("request");
+var cheerio = require("cheerio");
+
 var url = "https://www.eksisozluk.com/";
 
 app.use(bodyParser.urlencoded({extended:false}));
@@ -34,9 +37,14 @@ app.route("/entries")
   } else {
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
   }
+  //request(newUrl, function (err, page, body){
+    //res.write("ok");
+    //res.end();
+  //});
+  //res.end();
   parser.getInfo(newUrl, function(info){
-    console.log(info);
-    res.write(info);
+    res.write(" " + info);
+    //res.end();
   });
   //res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
   res.end();       
