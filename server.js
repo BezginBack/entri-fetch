@@ -37,17 +37,13 @@ app.route("/entries")
   } else {
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
   }
-  //request(newUrl, function (err, page, body){
-    //res.write("ok");
-    //res.end();
-  //});
-  //res.end();
   parser.getInfo(newUrl, function(info){
-    res.write(" " + info);
-    //res.end();
-  });
-  //res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
-  res.end();       
+    res.write(info);
+    if(info = 'end') {
+      res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
+      res.end();
+    }
+  });       
 });
 
 app.listen(process.env.PORT, function () {

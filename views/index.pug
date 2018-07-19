@@ -10,7 +10,6 @@ html
   script(src="/controllers/ajax.js", type="text/javascript")
   body
     main
-    div.result
     if data.isSearched
       if data.content
         if data.title != 'Error'
@@ -19,14 +18,14 @@ html
               span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
               span(class='mainpage')  mainpage?
           else
-            div.data= '1 page'
+            div.result= '1 page'
               span(class='continue', data-pagecounter=0, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
               span(class='mainpage')  mainpage?
         else
           div.err= data.content
             span(class='mainpage')  mainpage?
       else
-        div.data= 'no title'
+        div.return= 'no title'
           span(class='mainpage')  mainpage?
     else
       form(method="get")
