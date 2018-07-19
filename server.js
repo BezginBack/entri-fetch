@@ -1,8 +1,7 @@
 var express = require("express");
 var app = express();
-
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
 
 var parser = require("./models/parser.js");
 var request = require("request");
@@ -118,7 +117,7 @@ io.on('connection', function(socket){
   console.log('a user connected');
 });
 
-http.listen(process.env.PORT, function () {
+server.listen(process.env.PORT, function () {
   var date = new Date(Date.now());
   var time = date.toLocaleTimeString('en-US', { hour12: false });
   var day = date.toDateString();
