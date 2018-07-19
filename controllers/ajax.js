@@ -17,9 +17,11 @@ $('document').ready(function(){
       beforeSend : waitFunction,
       error : function(err){
         console.log(err);
+        $('.result').html(err);
       },
       success : function(res){
-        $('.result').html(res);
+        console.log(res);
+        //$('.result').html(res);
       }
     });  
   });

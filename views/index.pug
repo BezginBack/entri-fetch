@@ -10,6 +10,7 @@ html
   script(src="/controllers/ajax.js", type="text/javascript")
   body
     main
+    div.result
     if data.isSearched
       if data.content
         if data.title != 'Error'
@@ -30,6 +31,5 @@ html
     else
       form(method="get")
         input(class="search", type="search", name="search")
-      div.result
     footer
       a(href="https://glitch.com") Remix this in Glitch
