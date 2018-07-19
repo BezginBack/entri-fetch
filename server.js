@@ -21,8 +21,7 @@ app.route("/")
     var data = {};
     parser.getData(url + q, function(data){
         data = {
-          'isSearched': true,
-          'title': 'Result',
+          
           'content': {
             'pageCounter' : data.pageCounter,
             'dataTitle' : data.dataTitle,

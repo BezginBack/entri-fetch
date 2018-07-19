@@ -3,12 +3,20 @@ var cheerio = require("cheerio");
 
 exports.getData = function(url, callback){
   request(url, function (err, page, body){
-    if (err) callback(err);
+    var pageData = {
+      'isSearched': true,
+    };
+    if (err) {
+      pageData['title'] = 'err
+    }
+    var pageData = {
+      'title': 'Result',
+    };
     var $ = cheerio.load(body);
     if( $("#topic").eq(0).data("not-found") == true ){
-      callback('no entry');
+      callback(pageData);
     } else {
-      var pageData = {
+      pageData['content'] = {
         'pageCounter' : $(".pager").eq(0).data("pagecount"),
         'dataTitle' : $("#title").eq(0).data("slug"),
         'dataId' : $("#title").eq(0).data("id")
