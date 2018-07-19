@@ -19,7 +19,6 @@ $('document').ready(function(){
         console.log(err);
       },
       success : function(res){
-        console.log(res);
         $('.result').html(res);
       }
     });  

@@ -102,10 +102,11 @@ app.route("/entries")
   }
   request(newUrl, function (err, page, body) {
     var $ = cheerio.load(body);
-    //var post = {};
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
-      //post['entry' + j] = $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text();
-      res.write('entry' + j + ":" + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text() + "<br>");
+      res.write(j + 1 + " . " + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text() + "<br>");
+      if (j == $(".entry-date").get().length - 1){
+        res.write("<a href=" + process.env.MAIN_URL + "> mainpage?</a>");
+      }
     }
     res.end();
   });          
