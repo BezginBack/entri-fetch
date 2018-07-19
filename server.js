@@ -2,7 +2,6 @@ var express = require("express");
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
-
 var parser = require("./models/parser.js");
 var request = require("request");
 var bodyParser = require("body-parser");
@@ -113,11 +112,11 @@ app.route("/entries")
   });          
 });
 
-io.on('connection', function(socket){
-  console.log('a user connected');
+io.on('connect', function(socket){
   socket.on('join', function(data) {
-        console.log(data);
-    });
+    console.log(data);
+    server.emit('messages', 'Hello from server');
+  });
 });
 
 server.listen(process.env.PORT, function () {
