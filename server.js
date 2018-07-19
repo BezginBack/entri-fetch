@@ -115,6 +115,9 @@ app.route("/entries")
 
 io.on('connection', function(socket){
   console.log('a user connected');
+  socket.on('join', function(data) {
+        console.log(data);
+    });
 });
 
 server.listen(process.env.PORT, function () {
