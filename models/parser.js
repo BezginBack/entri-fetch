@@ -1,6 +1,6 @@
 var cheerio = require("cheerio");
 
-exports.parseHtml = function(body, callback){
+exports.getData = function(body, callback){
   var $ = cheerio.load(body);
   if( $("#topic").eq(0).data("not-found") == true ){
     callback('no entry');

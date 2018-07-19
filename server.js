@@ -72,7 +72,7 @@ app.route("/")
     var data = {};
     request(url + q, function (err, page, body) {
       if (err) res.send(err);
-      parser.parseHtml(body, function(info){
+      parser.getData(body, function(info){
           data = {
             'isSearched': true,
             'title': 'Result',
@@ -87,7 +87,7 @@ app.route("/")
     });
   } else {
     data = {
-        'title': 'Hello',
+      'title': 'Hello',
     };
     res.render('index', {data: data});
   }
@@ -105,7 +105,7 @@ app.route("/entries")
     var post = {};
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
       post['entry' + j] = $(".content").eq(j).text() + " - " + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text();
-      res.send($(".content").eq(j).text() + " - " + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text());
+      res.send(post);
     }
   });          
 });
