@@ -12,4 +12,14 @@ exports.getData = function(body, callback){
     };
     callback(pageInfo);
   }
-}
+};
+
+exports.getInfo = function(body, callback){
+  var $ = cheerio.load(body);
+  for(var j = 0 ; j < $(".entry-date").get().length; j++){
+      callback(j + 1 + " . " + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text() + "</br>");
+      if (j == $(".entry-date").get().length - 1){
+        callback("<a href='" + process.env.MAIN_URL + "'>mainpage?</a>");
+      }
+    }
+};
