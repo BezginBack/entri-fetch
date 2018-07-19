@@ -16,10 +16,11 @@ $('document').ready(function(){
       //dataType : 'json',
       beforeSend : waitFunction,
       error : function(err){
-          console.log(err);
+        console.log(err);
       },
       success : function(res){
-          console.log(res);
+        console.log(res);
+        $('.result').html(res);
       }
     });  
   });

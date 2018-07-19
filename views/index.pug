@@ -13,7 +13,7 @@ html
     if data.isSearched
       if data.content.dataId
         if data.content.pageCounter
-          div.result= data.content.pageCounter + ' pages'
+          div.data= data.content.pageCounter + ' pages'
             span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
             span(class='mainpage')  mainpage?
         else
@@ -23,6 +23,6 @@ html
     else
       form(method="get")
         input(class="search", type="search", name="search")
-      div(class='')
+      div.result
     footer
       a(href="https://glitch.com") Remix this in Glitch
