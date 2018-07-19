@@ -36,13 +36,12 @@ app.route("/entries")
   } else {
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
   }
-  request(newUrl, function (err, page, body) {
-    parser.getInfo(body, function(info){
-      res.write(info);
-    });
-    res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
-    res.end();
-  });          
+  parser.getInfo(newUrl, function(info){
+    console.log(info);
+    //res.write(info);
+  });
+  res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
+  res.end();       
 });
 
 app.listen(process.env.PORT, function () {
