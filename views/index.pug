@@ -11,7 +11,13 @@ html
   script(src="/socket.io/socket.io.js")
   script(src="/controllers/socket.io.js")
   script.
-      
+      var socket = io.connect('https://entri-fetch.glitch.me/');
+      socket.on('connect', function(data) {
+        socket.emit('join', 'Hello World from client');
+        socket.on('messages', function(datas) {
+          console.log(datas);
+        });
+      });
   body
     main
     if data.isSearched

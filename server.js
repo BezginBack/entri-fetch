@@ -112,10 +112,10 @@ app.route("/entries")
   });          
 });
 
-io.on('connect', function(socket){
-  socket.on('join', function(data) {
+io.on('connect', function(client){
+  client.on('join', function(data) {
     console.log(data);
-    server.emit('messages', 'Hello from server');
+    client.emit('messages', 'Hello from server');
   });
 });
 
