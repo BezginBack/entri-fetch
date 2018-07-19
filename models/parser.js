@@ -1,17 +1,21 @@
+var request = require("request");
 var cheerio = require("cheerio");
 
-exports.getData = function(body, callback){
-  var $ = cheerio.load(body);
-  if( $("#topic").eq(0).data("not-found") == true ){
-    callback('no entry');
-  } else {
-    var pageInfo = {
-      'pageCounter' : $(".pager").eq(0).data("pagecount"),
-      'dataTitle' : $("#title").eq(0).data("slug"),
-      'dataId' : $("#title").eq(0).data("id")
-    };
-    callback(pageInfo);
-  }
+exports.getData = function(url, callback){
+  request(url, function (err, page, body){
+    if (err) callback(err);
+    var $ = cheerio.load(body);
+    if( $("#topic").eq(0).data("not-found") == true ){
+      callback('no entry');
+    } else {
+      var pageData = {
+        'pageCounter' : $(".pager").eq(0).data("pagecount"),
+        'dataTitle' : $("#title").eq(0).data("slug"),
+        'dataId' : $("#title").eq(0).data("id")
+      };
+      callback(pageData);
+    }
+  });
 };
 
 exports.getInfo = function(body, callback){

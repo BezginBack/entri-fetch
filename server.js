@@ -19,20 +19,17 @@ app.route("/")
   if(req.query.search){
     var q = '/' + req.query.search; 
     var data = {};
-    request(url + q, function (err, page, body) {
-      if (err) res.send(err);
-      parser.getData(body, function(data){
-          data = {
-            'isSearched': true,
-            'title': 'Result',
-            'content': {
-              'pageCounter' : data.pageCounter,
-              'dataTitle' : data.dataTitle,
-              'dataId' : data.dataId                
-            }
-          };
-        res.render('index', {data: data});
-      });
+    parser.getData(url + q, function(data){
+        data = {
+          'isSearched': true,
+          'title': 'Result',
+          'content': {
+            'pageCounter' : data.pageCounter,
+            'dataTitle' : data.dataTitle,
+            'dataId' : data.dataId                
+          }
+        };
+      res.render('index', {data: data});
     });
   } else {
     data = {
