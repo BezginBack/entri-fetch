@@ -19,7 +19,6 @@ app.route("/")
   if(req.query.search){
     var q = '/' + req.query.search; 
     parser.getData(url + q, function(data){
-      console.log(data);
       res.render('index', {data: data});
     });
   } else {

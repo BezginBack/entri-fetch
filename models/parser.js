@@ -24,8 +24,11 @@ exports.getData = function(url, callback){
   });
 };
 
-exports.getInfo = function(body, callback){
-  var $ = cheerio.load(body);
+exports.getInfo = function(url, callback){
+  request(url, function (err, page, body){
+  
+  });
+  
   for(var j = 0 ; j < $(".entry-date").get().length; j++){
     callback(j + 1 + " . " + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text() + "</br>");
   }
