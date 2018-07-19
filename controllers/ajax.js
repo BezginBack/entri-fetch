@@ -13,7 +13,7 @@ $('document').ready(function(){
       type: 'post',
       url : appUrl + '/entries',
       data : data,
-      dataType : 'json',
+      //dataType : 'json',
       beforeSend : waitFunction,
       error : function(err){
           console.log(err);
