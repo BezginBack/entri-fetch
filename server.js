@@ -21,14 +21,14 @@ app.route("/")
     var data = {};
     request(url + q, function (err, page, body) {
       if (err) res.send(err);
-      parser.getData(body, function(info){
+      parser.getData(body, function(data){
           data = {
             'isSearched': true,
             'title': 'Result',
             'content': {
-              'pageCounter' : info.pageCounter,
-              'dataTitle' : info.dataTitle,
-              'dataId' : info.dataId                
+              'pageCounter' : data.pageCounter,
+              'dataTitle' : data.dataTitle,
+              'dataId' : data.dataId                
             }
           };
         res.render('index', {data: data});
@@ -50,13 +50,10 @@ app.route("/entries")
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
   }
   request(newUrl, function (err, page, body) {
-    var $ = cheerio.load(body);
-    for(var j = 0 ; j < $(".entry-date").get().length; j++){
-      res.write(j + 1 + " . " + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text() + "</br>");
-      if (j == $(".entry-date").get().length - 1){
-        res.write("<a href='" + process.env.MAIN_URL + "'>mainpage?</a>");
-      }
-    }
+    parser.getInfo(body, function(info){
+      res.write(info);
+    });
+    res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
     res.end();
   });          
 });
