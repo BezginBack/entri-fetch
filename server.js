@@ -38,9 +38,9 @@ app.route("/entries")
   }
   parser.getInfo(newUrl, function(info){
     console.log(info);
-    //res.write(info);
+    res.write(info);
   });
-  res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
+  //res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
   res.end();       
 });
 

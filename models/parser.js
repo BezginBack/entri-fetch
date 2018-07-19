@@ -27,8 +27,9 @@ exports.getData = function(url, callback){
 exports.getInfo = function(url, callback){
   request(url, function (err, page, body){
     var $ = cheerio.load(body);
-    for(var j = 0 ; j < $(".entry-date").get().length; j++){
-      callback($('.entry-author').eq(j).text() + " - " + $('.entry-date').eq(j).text() + "</br>");
-    }
+    //for(var j = 0 ; j < $(".entry-date").get().length; j++){
+      //callback(j) //$(".entry-author").eq(j).text());
+    //}
+    callback("ok");
   });
 };
