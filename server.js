@@ -1,7 +1,5 @@
 var express = require("express");
 var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
 var parser = require("./models/parser.js");
 var request = require("request");
 var bodyParser = require("body-parser");
@@ -108,18 +106,11 @@ app.route("/entries")
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
       post['entry' + j] = $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text();
     }
-    res.send(post);
+    res.write(JSON.stringify(post));
   });          
 });
 
-io.on('connect', function(client){
-  client.on('join', function(data) {
-    console.log(data);
-    client.emit('messages', 'Hello from server');
-  });
-});
-
-server.listen(process.env.PORT, function () {
+app.listen(process.env.PORT, function () {
   var date = new Date(Date.now());
   var time = date.toLocaleTimeString('en-US', { hour12: false });
   var day = date.toDateString();
