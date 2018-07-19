@@ -18,20 +18,12 @@ app.route("/")
   .get(function (req, res) {
   if(req.query.search){
     var q = '/' + req.query.search; 
-    var data = {};
     parser.getData(url + q, function(data){
-        data = {
-          
-          'content': {
-            'pageCounter' : data.pageCounter,
-            'dataTitle' : data.dataTitle,
-            'dataId' : data.dataId                
-          }
-        };
+      console.log(data);
       res.render('index', {data: data});
     });
   } else {
-    data = {
+    var data = {
       'title': 'Hello',
     };
     res.render('index', {data: data});

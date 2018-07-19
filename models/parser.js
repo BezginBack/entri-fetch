@@ -7,22 +7,20 @@ exports.getData = function(url, callback){
       'isSearched': true,
     };
     if (err) {
-      pageData['title'] = 'err
-    }
-    var pageData = {
-      'title': 'Result',
-    };
-    var $ = cheerio.load(body);
-    if( $("#topic").eq(0).data("not-found") == true ){
-      callback(pageData);
+      pageData['title'] = 'Error';
+      pageData['content'] = err;
     } else {
-      pageData['content'] = {
-        'pageCounter' : $(".pager").eq(0).data("pagecount"),
-        'dataTitle' : $("#title").eq(0).data("slug"),
-        'dataId' : $("#title").eq(0).data("id")
-      };
-      callback(pageData);
+      pageData['title'] = 'Result';
+      var $ = cheerio.load(body);
+      if( $("#topic").eq(0).data("not-found") != true ){
+        pageData['content'] = {
+          'pageCounter' : $(".pager").eq(0).data("pagecount"),
+          'dataTitle' : $("#title").eq(0).data("slug"),
+          'dataId' : $("#title").eq(0).data("id")
+        };
+      }
     }
+    callback(pageData);
   });
 };
 

@@ -11,13 +11,13 @@ html
   body
     main
     if data.isSearched
-      if data.content.dataId
+      if data.content
         if data.content.pageCounter
           div.data= data.content.pageCounter + ' pages'
             span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
             span(class='mainpage')  mainpage?
         else
-          div.result= '1 page'
+          div.data= '1 page'
             span(class='continue', data-pagecounter=0, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
             span(class='mainpage')  mainpage?
     else
