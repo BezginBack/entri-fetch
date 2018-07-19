@@ -10,8 +10,9 @@ html
   script(src="/controllers/ajax.js")
   script(src="/socket.io/socket.io.js")
   script
-    'var socket = io.connect('http://localhost:8080');'
-    socket.on('connect', function(data) {
+    :coffee-script
+      socket = io.connect('http://localhost:8080');
+      socket.on('connect', function(data) {
         socket.emit('join', 'Hello World from client');
     });
   body

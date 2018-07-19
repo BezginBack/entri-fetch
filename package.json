@@ -17,6 +17,7 @@
     "eksisozluk": "^0.2.3",
     "express": "^4.15.3",
     "jsdom": "^11.1.0",
+    "jstransformer-coffee-script": "^1.1.1",
     "pug": "^2.0.3",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
