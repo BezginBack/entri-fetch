@@ -36,8 +36,16 @@ app.route("/entries")
     //for(var i = 1; i <= req.body.dataPagecounter; i++){
       //var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + i;
     //}
+    var p = req.body.dataPagecounter;
     var interval = setInterval(function() {
-          console.log("ok");
+      if (p > 0){
+        //console.log(url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + p);
+        res.write(url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + p);
+        p--;
+      } else {
+        res.end();
+        clearInterval(interval);
+      }
     }, 5000);
   } else {
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
