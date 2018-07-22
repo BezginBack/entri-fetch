@@ -17,14 +17,14 @@ $('document').ready(function(){
   
   $('.continue').on('click', function(){
     var p = $('.continue').data('pagecounter');
-    $('.continue').data('title') + "--" + $('.continue').data('id')
+    var t = p;
+    var titleId = $('.continue').data('title') + "--" + $('.continue').data('id')
     var url = appUrl + '/entries';
-    alert(p);
     $('.data').empty();
     var interval = setInterval(function() {
       if(p > 0) {
         var data = {
-          'url' : $('.continue').data('title') + "--" + $('.continue').data('id') + "?p=" + p
+          'url' : titleId + "?p=" + (t - p + 1)
         };
         p--;
         ajaxFunction(url, data, waitFunction, function(err){
