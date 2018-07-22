@@ -5,6 +5,7 @@ html
   link(id="favicon", rel="icon", href="https://glitch.com/edit/favicon-app.ico", type="image/x-icon")
   meta(charset="utf-8")
   meta(name="viewport", content="width=device-width, initial-scale=1")
+  link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
   link(rel="stylesheet", href="/style.css")
   script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js", type="text/javascript")
   script(src="/controllers/ajax.js", type="text/javascript")
@@ -30,6 +31,6 @@ html
           span(class='mainpage')  mainpage?
     else
       form(method="get")
-        input(class="search", type="search", name="search")
+        input(class="search form-control", placeholder="enter whole title" type="search", name="search")
     footer
       a(href="https://glitch.com") Remix this in Glitch

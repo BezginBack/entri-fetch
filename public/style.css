@@ -6,13 +6,14 @@
   display: block;
   opacity: 0.8;
   height: 30px;
-  padding-left: 10px; 
+  padding-left: 1%;
+  border-radius: 0;
 }
 
 footer {
   width: 30%;
   display: block;
-  margin: auto;
+  margin: 0 auto;
   margin-top: 2%;
   font-size: 0.8em;
   text-align: center;
