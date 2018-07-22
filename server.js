@@ -33,20 +33,9 @@ app.route("/")
 app.route("/entries")
   .post(function (req, res) {
   if (req.body.dataPagecounter > 0) {
-    //for(var i = 1; i <= req.body.dataPagecounter; i++){
-      //var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + i;
-    //}
     var p = req.body.dataPagecounter;
-    var interval = setInterval(function() {
-      if (p > 0){
         //console.log(url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + p);
-        res.write(url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + p);
-        p--;
-      } else {
-        res.end();
-        clearInterval(interval);
-      }
-    }, 5000);
+        //res.write(url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + p + "<br>");
   } else {
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
     parser.getInfo(newUrl, function(info){
