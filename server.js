@@ -35,7 +35,7 @@ app.route("/entries")
   var newUrl = url + req.body.url;
   parser.getInfo(newUrl, function(info){
     if(info == 'end') {
-      res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
+      //res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
       res.end();
     } else {
       res.write(info);
