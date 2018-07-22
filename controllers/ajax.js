@@ -33,7 +33,7 @@ $('document').ready(function(){
           $('.result').append(res);
         });
       } else {
-        $('.result').append("<a href='" + appUrl + "'>mainpage</a>");
+        $('.result').append("<a href='" + appUrl + "'>Mainpage</a>");
         clearInterval(interval);
       }
     }, 5000);

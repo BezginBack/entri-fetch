@@ -25,6 +25,14 @@
 
 .continue:hover, .mainpage:hover{
   text-decoration: underline;
+  cursor: pointer;
+}
+
+.info{
+  width: 30%;
+  margin: 0 auto;
+  display: block;
+  opacity: 0.8;
 }
 
 footer {

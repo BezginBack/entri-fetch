@@ -30,10 +30,10 @@ html
               span  or go to 
               span(class='mainpage') Mainpage
         else
-          div.err.text-danger= data.content 
+          div.err.text-danger= data.content + ' '
             span(class='mainpage') Mainpage
       else
-        div.return.text-info= 'no entries '
+        div.return.text-info= 'No entries... '
           span(class='mainpage') Mainpage
     else
       form(method="get")
