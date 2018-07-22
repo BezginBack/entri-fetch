@@ -3,9 +3,6 @@ var app = express();
 var parser = require("./models/parser.js");
 var bodyParser = require("body-parser");
 
-var request = require("request");
-var cheerio = require("cheerio");
-
 var url = "https://www.eksisozluk.com/";
 
 app.use(bodyParser.urlencoded({extended:false}));

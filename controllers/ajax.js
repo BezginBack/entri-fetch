@@ -30,7 +30,6 @@ $('document').ready(function(){
         ajaxFunction(url, data, waitFunction, function(err){
           console.log(err);
         }, function(res){
-          console.log(res);
           $('.result').append(res);
         });
       } else {
