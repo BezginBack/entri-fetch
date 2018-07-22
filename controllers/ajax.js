@@ -16,10 +16,11 @@ $('document').ready(function(){
   };
   
   $('.continue').on('click', function(){
-    $('.result').empty();
     var p = $('.continue').data('pagecounter');
+    $('.continue').data('title') + "--" + $('.continue').data('id')
     var url = appUrl + '/entries';
     alert(p);
+    $('.data').empty();
     var interval = setInterval(function() {
       if(p > 0) {
         var data = {
