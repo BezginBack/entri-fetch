@@ -16,8 +16,10 @@ html
       if data.content
         if data.title != 'Error'
           if data.content.pageCounter
-            div.data.alert-success= data.content.pageCounter + ' pages'
-              span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
+            div.data.alert-success
+              strong=data.content.pageCounter
+              span  pages
+              span(class='continue strong', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
               span(class='mainpage')  mainpage?
           else
             div.data.alert-success
@@ -29,7 +31,7 @@ html
           div.err.alert-danger= data.content
             span(class='mainpage')  mainpage?
       else
-        div.return= 'no entries'
+        div.return.alert-info= 'no entries'
           span(class='mainpage')  mainpage?
     else
       form(method="get")
