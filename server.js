@@ -33,15 +33,18 @@ app.route("/")
 app.route("/entries")
   .post(function (req, res) {
   if (req.body.dataPagecounter > 0) {
-  
+    for(var i = 1; i <= req.body.dataPagecounter; i++){
+      var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + i;
+    }
   } else {
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
   }
   parser.getInfo(newUrl, function(info){
-    res.write(info);
     if(info == 'end') {
       res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
       res.end();
+    } else {
+      res.write(info);
     }
   });       
 });
