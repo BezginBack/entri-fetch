@@ -19,6 +19,14 @@
   text-align: center;
 }
 
+.continue, .mainpage{
+  font-weight: bold;
+}
+
+.continue:hover, .mainpage:hover{
+  text-decoration: underline;
+}
+
 footer {
   width: 30%;
   display: block;

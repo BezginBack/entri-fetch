@@ -16,23 +16,25 @@ html
       if data.content
         if data.title != 'Error'
           if data.content.pageCounter
-            div.data.alert-success
-              strong=data.content.pageCounter
-              span  pages
-              span(class='continue strong', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
-              span(class='mainpage')  mainpage?
+            div.data.text-success
+              strong=data.content.pageCounter 
+              span  pages found. 
+              span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId) Countinue
+              span  or go to 
+              span(class='mainpage') Mainpage
           else
-            div.data.alert-success
+            div.data.text-success
               strong 1 
-              span page
-              span(class='continue', data-pagecounter='1', data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
-              span(class='mainpage')  mainpage?
+              span page found 
+              span(class='continue', data-pagecounter='1', data-title=data.content.dataTitle, data-id=data.content.dataId) Countinue
+              span  or go to 
+              span(class='mainpage') Mainpage
         else
-          div.err.alert-danger= data.content
-            span(class='mainpage')  mainpage?
+          div.err.text-danger= data.content 
+            span(class='mainpage') Mainpage
       else
-        div.return.alert-info= 'no entries'
-          span(class='mainpage')  mainpage?
+        div.return.text-info= 'no entries '
+          span(class='mainpage') Mainpage
     else
       form(method="get")
         input(class="search form-control", placeholder="enter whole title" type="search", name="search")
