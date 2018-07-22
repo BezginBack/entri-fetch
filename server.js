@@ -32,19 +32,15 @@ app.route("/")
 
 app.route("/entries")
   .post(function (req, res) {
-  if (req.body.dataPagecounter > 0) {
-    
-  } else {
-    var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
-    parser.getInfo(newUrl, function(info){
-      if(info == 'end') {
-        res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
-        res.end();
-      } else {
-        res.write(info);
-      }
-    });       
-  }
+  var newUrl = url + req.body.url;
+  parser.getInfo(newUrl, function(info){
+    if(info == 'end') {
+      res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
+      res.end();
+    } else {
+      res.write(info);
+    }
+  });
 });
 
 app.listen(process.env.PORT, function () {

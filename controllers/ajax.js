@@ -16,7 +16,7 @@ $('document').ready(function(){
   };
   
   $('.continue').on('click', function(){
-    var data = {
+    /*var data = {
       'dataPagecounter' : $('.continue').data('pagecounter'),
       'dataPagetitle' : $('.continue').data('title'),
       'dataPageid' : $('.continue').data('id')
@@ -27,6 +27,15 @@ $('document').ready(function(){
     }, function(res){
       console.log(res);
       $('.result').html(res);
+    });*/
+    var data = {
+      'url' : $('.continue').data('title') + "--" + $('.continue').data('id') + "?p=" + $('.continue').data('pagecounter')
+    };
+    var url = appUrl + '/entries';
+    ajaxFunction(url, data, waitFunction, function(err){
+      console.log(err);
+    }, function(res){
+      console.log(res);
     });
   });
 
