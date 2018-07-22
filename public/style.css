@@ -10,7 +10,7 @@
   border-radius: 0;
 }
 
-.data, .error, .return {
+.data, .err, .return {
   width: 30%;
   margin: 0 auto;
   margin-top: 2%;

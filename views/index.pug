@@ -16,18 +16,20 @@ html
       if data.content
         if data.title != 'Error'
           if data.content.pageCounter
-            div.data= data.content.pageCounter + ' pages'
+            div.data.alert-success= data.content.pageCounter + ' pages'
               span(class='continue', data-pagecounter=data.content.pageCounter, data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
               span(class='mainpage')  mainpage?
           else
-            div.data= '1 page'
+            div.data.alert-success
+              strong 1 
+              span page
               span(class='continue', data-pagecounter='1', data-title=data.content.dataTitle, data-id=data.content.dataId)  countinue?
               span(class='mainpage')  mainpage?
         else
-          div.err= data.content
+          div.err.alert-danger= data.content
             span(class='mainpage')  mainpage?
       else
-        div.return= 'no title'
+        div.return= 'no entries'
           span(class='mainpage')  mainpage?
     else
       form(method="get")
