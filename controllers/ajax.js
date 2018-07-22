@@ -3,27 +3,33 @@ $('document').ready(function(){
   var waitFunction = function(){
     
   };
+  
+  var ajaxFunction = function(url, data, wait, err, suc){
+    $.ajax({
+      type: 'post',
+      url : url,
+      data : data,
+      beforeSend : wait,
+      error : err,
+      success : suc
+    });
+  };
+  
   $('.continue').on('click', function(){
     var data = {
       'dataPagecounter' : $('.continue').data('pagecounter'),
       'dataPagetitle' : $('.continue').data('title'),
       'dataPageid' : $('.continue').data('id')
     };
-    $.ajax({
-      type: 'post',
-      url : appUrl + '/entries',
-      data : data,
-      //dataType : 'json',
-      beforeSend : waitFunction,
-      error : function(err){
-        console.log(err);
-      },
-      success : function(res){
-        console.log(res);
-        $('.result').html(res);
-      }
-    });  
+    var url = appUrl + '/entries';
+    ajaxFunction(url, data, waitFunction, function(err){
+      console.log(err);
+    }, function(res){
+      console.log(res);
+      $('.result').html(res);
+    });
   });
+
   $('.mainpage').on('click', function(){
     document.location.href = appUrl;
   });

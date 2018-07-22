@@ -33,9 +33,7 @@ app.route("/")
 app.route("/entries")
   .post(function (req, res) {
   if (req.body.dataPagecounter > 0) {
-    var p = req.body.dataPagecounter;
-        //console.log(url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + p);
-        //res.write(url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + p + "<br>");
+    
   } else {
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
     parser.getInfo(newUrl, function(info){
