@@ -33,20 +33,23 @@ app.route("/")
 app.route("/entries")
   .post(function (req, res) {
   if (req.body.dataPagecounter > 0) {
-    for(var i = 1; i <= req.body.dataPagecounter; i++){
-      var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + i;
-    }
+    //for(var i = 1; i <= req.body.dataPagecounter; i++){
+      //var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid + "?p=" + i;
+    //}
+    var interval = setInterval(function() {
+          console.log("ok");
+    }, 5000);
   } else {
     var newUrl = url + req.body.dataPagetitle + "--" + req.body.dataPageid;
+    parser.getInfo(newUrl, function(info){
+      if(info == 'end') {
+        res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
+        res.end();
+      } else {
+        res.write(info);
+      }
+    });       
   }
-  parser.getInfo(newUrl, function(info){
-    if(info == 'end') {
-      res.write("<a href='" + process.env.MAIN_URL + "'>mainpage</a>");
-      res.end();
-    } else {
-      res.write(info);
-    }
-  });       
 });
 
 app.listen(process.env.PORT, function () {
