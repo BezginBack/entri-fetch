@@ -27,9 +27,14 @@ exports.getData = function(url, callback){
 exports.getInfo = function(url, callback){
   request(url, function (err, page, body){
     var $ = cheerio.load(body);
-    var cp = $(".pager").eq(0).data("currentpage");
+    var cp = 1;
+    if($(".pager").eq(0).data("currentpage")){
+      cp = $(".pager").eq(0).data("currentpage");
+    } 
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
-      callback("<span class='col-sm-6'>" + 
+      callback("<span class='col-sm-1'>" +
+               (((cp-1)*10) + (1 + j)) +
+               "</span><span class='col-sm-5'>" + 
                $(".entry-author").eq(j).text() + 
                "</span><span class='col-sm-1'>" +
                $('#entry-item-list').find('li').eq(j).data('favorite-count') + 
