@@ -30,7 +30,9 @@ exports.getInfo = function(url, callback){
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
       callback("<span class='col-sm-6'>" + 
                $(".entry-author").eq(j).text() + 
-               "</span><span class='col-sm-2'></span><span class='col-sm-4'>" + 
+               "</span><span class='col-sm-2'>" +
+               $(".entry-author").eq(j).text() + 
+               "</span><span class='col-sm-4'>" + 
                $(".entry-date").eq(j).text() + "</span>");
     }
     callback('end');
