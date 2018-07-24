@@ -28,7 +28,7 @@ exports.getInfo = function(url, callback){
   request(url, function (err, page, body){
     var $ = cheerio.load(body);
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
-      callback("<div class='info'>" + $(".entry-author").eq(j).text() + " - " + $(".entry-date").eq(j).text() + "</div>");
+      callback("<div class='col-sm-4'>" + $(".entry-author").eq(j).text() + "</div><div class='col-sm-4'>" + $(".entry-date").eq(j).text() + "</div>");
     }
     callback('end');
   });
