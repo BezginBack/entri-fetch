@@ -27,6 +27,7 @@ exports.getData = function(url, callback){
 exports.getInfo = function(url, callback){
   request(url, function (err, page, body){
     var $ = cheerio.load(body);
+    var cp = $(".pager").eq(0).data("currentpage");
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
       callback("<span class='col-sm-6'>" + 
                $(".entry-author").eq(j).text() + 
