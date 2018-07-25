@@ -15,8 +15,9 @@ app.set('view engine', 'pug')
 app.route("/")
   .get(function (req, res) {
   if(req.query.search){
-    var q = "/" + req.query.search; 
+    var q = req.query.search; 
     parser.getData(url + q, function(data){
+      console.log(url + q);
       res.render('index', {data: data});
     });
   } else {
@@ -43,6 +44,5 @@ app.listen(process.env.PORT, function () {
   var date = new Date(Date.now());
   var time = date.toLocaleTimeString('en-US', { hour12: false });
   var day = date.toDateString();
-  console.log(process.env.FETCH_URL);
   console.log('Server listening :\n', 'Port:', process.env.PORT, 'Time :', day + ' ' + time);
 });
