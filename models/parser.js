@@ -32,14 +32,14 @@ exports.getInfo = function(url, callback){
       cp = $(".pager").eq(0).data("currentpage");
     } 
     for(var j = 0 ; j < $(".entry-date").get().length; j++){
-      callback("<span class='col-sm-1'>" +
+      callback("<div><span class='col-sm-1 col-lg-1'>" +
                (((cp-1)*10) + (1 + j)) +
-               "</span><span class='col-sm-5'>" + 
+               "</span><span class='col-sm-5 col-lg-5'>-" + 
                $(".entry-author").eq(j).text() + 
-               "</span><span class='col-sm-1'>" +
+               "</span><span class='col-sm-1 col-lg-1'>-" +
                $('#entry-item-list').find('li').eq(j).data('favorite-count') + 
-               "</span><span class='col-sm-5'>" + 
-               $(".entry-date").eq(j).text() + "</span>");
+               "</span><span class='col-sm-5 col-lg-5'>-" + 
+               $(".entry-date").eq(j).text() + "</span></div>");
     }
     callback('end');
   });
