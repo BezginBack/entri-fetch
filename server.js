@@ -3,7 +3,7 @@ var app = express();
 var parser = require("./models/parser.js");
 var bodyParser = require("body-parser");
 
-var url = 'https://www.eksisozluk.com/';
+var url = process.env.FETCH_URL;
 
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -17,7 +17,6 @@ app.route("/")
   if(req.query.search){
     var q = req.query.search; 
     parser.getData(url + q, function(data){
-      console.log(url + q);
       res.render('index', {data: data});
     });
   } else {
