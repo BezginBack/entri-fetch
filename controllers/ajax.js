@@ -1,10 +1,14 @@
 var appUrl = window.location.origin;
 $('document').ready(function(){
   var waitFunction = function(){
-    $('.wait').css({display: 'block'});
-    
+    //$('.wait').css({display: 'block'});
+    $('.wait').fadeIn();
       var id = setInterval(function() {
         if($('.wait').css('display') == 'block'){
+          $('.wait').animate({opacity: '0.1'}, 1000);
+          $('.wait').animate({opacity: '0.9'}, 1000);
+        } else {
+          clearInterval(id);
         }
       }, 1000);    
   };
@@ -40,6 +44,7 @@ $('document').ready(function(){
         });
       } else {
         $('.result').append("<a href='" + appUrl + "'>Mainpage</a>");
+        $('.wait').css({display: 'none'});
         clearInterval(interval);
       }
     }, 5000);
