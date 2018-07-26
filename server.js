@@ -20,10 +20,10 @@ app.route("/")
       res.render('index', {data: data});
     });
   } else {
-    //var data = {
-      //'title': 'Hello',
-    //};
-    res.render('index', {});
+    var data = {
+      'title': 'EksiEntries | Mainpage',
+    };
+    res.render('index', {'data' : data});
   }
   });
 

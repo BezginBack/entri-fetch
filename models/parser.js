@@ -10,7 +10,7 @@ exports.getData = function(url, callback){
       pageData['title'] = 'Error';
       pageData['content'] = err;
     } else {
-      pageData['title'] = 'Result';
+      pageData['title'] = 'EksiEntries';
       var $ = cheerio.load(body);
       if( $("#topic").eq(0).data("not-found") != true ){
         pageData['content'] = {

@@ -21,6 +21,7 @@ $('document').ready(function(){
     var titleId = $('.continue').data('title') + "--" + $('.continue').data('id')
     var url = appUrl + '/entries';
     $('.data').empty();
+    $('title').html('EksiEntries | Result');
     var interval = setInterval(function() {
       if(p > 0) {
         var data = {
