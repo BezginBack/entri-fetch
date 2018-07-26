@@ -1,7 +1,10 @@
 var appUrl = window.location.origin;
 $('document').ready(function(){
   var waitFunction = function(){
-    
+    $('.wait').css({display: 'block'});
+    $('.wait').animate({
+      opacity: '0.9'
+    });
   };
   
   var ajaxFunction = function(url, data, wait, err, suc){

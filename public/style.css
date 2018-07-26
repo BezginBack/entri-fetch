@@ -27,14 +27,17 @@
   text-decoration: underline;
   cursor: pointer;
 }
-.wait {
-  
-.result {
+
+.result, .wait {
   width: 80%;
   margin: 0 auto;
   margin-top: 2%;
   display: block;
   opacity: 0.8;
+}
+
+.wait {
+  display: none;  
 }
 
 footer {
