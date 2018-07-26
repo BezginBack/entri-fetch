@@ -30,6 +30,12 @@ $('document').ready(function(){
     var titleId = $('.continue').data('title') + "--" + $('.continue').data('id')
     var url = appUrl + '/entries';
     $('.data').empty();
+    $('.result').append(
+      "<div><span class='col-sm-1 col-lg-1'>Num</span>" +
+      "<span class='col-sm-5 col-lg-5'>-Author</span>" +
+      "<span class='col-sm-1 col-lg-1'>-Fav</span>" +
+      "<span class='col-sm-5 col-lg-5'>-Date</span></div>"
+    );
     $('title').html('EksiEntries | Result');
     var interval = setInterval(function() {
       if(p > 0) {
@@ -43,7 +49,7 @@ $('document').ready(function(){
           $('.result').append(res);
         });
       } else {
-        $('.result').append("<a href='" + appUrl + "'>Mainpage</a>");
+        $('.result').append("<div class='row text-center'><a href='" + appUrl + "'>Mainpage</a></div>");
         $('.wait').css({display: 'none'});
         clearInterval(interval);
       }
