@@ -31,6 +31,7 @@
 .result {
   width: 80%;
   margin: 0 auto;
+  margin-top: 2%;
   display: block;
   opacity: 0.8;
 }
