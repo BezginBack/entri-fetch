@@ -1,16 +1,18 @@
-
-.search {
+form {
   width: 30%;
   margin: 0 auto;
   margin-top: 20%;
-  display: block;
+}
+
+form .search {
   opacity: 0.8;
   height: 30px;
-  padding-left: 1%;
   border-radius: 0;
 }
 
-.data, .err, .return {
+.data, 
+.err,
+.return {
   width: 30%;
   margin: 0 auto;
   margin-top: 2%;
@@ -19,21 +21,63 @@
   text-align: center;
 }
 
-.continue, .mainpage {
+.continue,
+.mainpage {
   font-weight: bold;
 }
 
-.continue:hover, .mainpage:hover {
+.continue:hover,
+.mainpage:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.result, .wait {
+.result,
+.wait {
   width: 80%;
   margin: 0 auto;
   margin-top: 2%;
   display: block;
   opacity: 0.8;
+}
+
+.result .titlebar {
+  width: 100%;
+  font-weight: bold;
+}
+
+.result .contentbar {
+  width: 100%;
+}
+
+.result .titlebar .infobox,
+.result .contentbar .infobox {
+  float: left;
+}
+
+.result .titlebar .numbox,
+.result .contentbar .numbox {
+  width: 5%;
+}
+
+.result .titlebar .authorbox,
+.result .contentbar .authorbox {
+  width: 50%;
+}
+
+.result .titlebar .favbox,
+.result .contentbar .favbox {
+  width: 5%;
+}
+
+.result .titlebar .entrydatebox,
+.result .contentbar .entrydatebox {
+  width: 20%;
+}
+
+.result .titlebar .editdatebox,
+.result .contentbar .editdatebox {
+  width: 20%;
 }
 
 .wait {
@@ -42,14 +86,12 @@
 
 footer {
   width: 30%;
-  display: block;
   margin: 0 auto;
   margin-top: 2%;
   opacity: 0.8;
   font-size: 0.8em;
   text-align: center;
   border-top: 1px solid lightgrey;
-  border-radius: 2px;
 }
 
 footer a {
