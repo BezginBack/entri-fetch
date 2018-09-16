@@ -19,11 +19,24 @@ $('document').ready(function(){
     
     var successFunction = function(res){
         var block = "";
+        var date = "";
+        var edit = "";
         for (var i = 0; i < res.length; i++ ) {
-            block += "<div><span class='col-sm-1 col-lg-1'>" + res[i].num + "</span>" +
-                    "<span class='col-sm-5 col-lg-5'>" + res[i].author + "</span>" +
-                    "<span class='col-sm-1 col-lg-1'>" + res[i].favor + "</span>" +
-                    "<span class='col-sm-5 col-lg-5'>" + res[i].date + "</span></div>";
+            var dateBlock = res[i].date;
+            if(dateBlock.split('~').length > 1) {
+                date = dateBlock.split('~')[0];
+                edit = dateBlock.split('~')[1];
+            } else {
+                date = res[i].date;
+                edit = " - ";
+            }
+            
+            block += "<div class='row contentbar'><span class='infobox numbox'>" + res[i].num + "</span>" +
+                    "<span class='infobox authorbox'>-" + res[i].author + "</span>" +
+                    "<span class='infobox favbox'>-" + res[i].favor + "</span>" +
+                    "<span class='infobox entrydatebox'>-" + date + "</span>" +
+                    "<span class='infobox editdatebox'>-" + edit + "</span></div>";
+
         }
         $('.result').append(block);
     };
@@ -38,10 +51,11 @@ $('document').ready(function(){
         });
     };
     
-    var titleBar = "<div><span class='col-sm-1 col-lg-1'>Num</span>" +
-            "<span class='col-sm-5 col-lg-5'>Author</span>" +
-            "<span class='col-sm-1 col-lg-1'>Fav</span>" +
-            "<span class='col-sm-5 col-lg-5'>Date</span></div>";
+    var titleBar = "<div class='row titlebar'><span class='infobox numbox'>Num</span>" +
+            "<span class='infobox authorbox'>-Author</span>" +
+            "<span class='infobox favbox'>-Fav</span>" +
+            "<span class='infobox entrydatebox'>-EntryDate</span>" +
+            "<span class='infobox editdatebox'>-EditDate</span></div>";
     
     var homeLink = "<div class='row text-center'><a href='" + appUrl + "'>Mainpage</a></div>";
   
